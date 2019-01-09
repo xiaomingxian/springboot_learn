@@ -37,7 +37,7 @@ management:
 #http://localhost:60000/beans查看beans
 #/metrics	返回当前应用的各类重要度量指标
 #/metrics/{name}	查看具体指标
-#/health	获取应用各类健康指标信息
+#/health	获取应用各类健康指标信息ge
 #	/dump	暴露程序运行中的线程信息
 #/trace	返回基本的http跟踪信息
 #	/shutdonw	关闭应用
@@ -77,7 +77,9 @@ eureka:
     instance-id: ${spring.application.name}:${server.port}
   client:
     service-url:
-      defaultZone: ${SERVER_URL:http://eureka02:8888/eureka,http://eureka01:7777/eureka}
+#      hosts文件中配置的情况下使用这个
+#      defaultZone: ${SERVER_URL:http://eureka02:8888/eureka,http://eureka01:7777/eureka}
+      defaultZone: ${SERVER_URL:http://localhost:8888/learn/eureka,http://localhost:7777/learn/eureka}
       register-with-eureka: true
       fetch-registry: true
     server:
