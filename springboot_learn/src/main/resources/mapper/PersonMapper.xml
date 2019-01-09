@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xxm.dao.PersonMapper">
+    <resultMap id="BaseResultMap" type="xxm.pojo.Person">
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="base_column">
+        username,password,name
+    </sql>
+
+    <insert id="insert" parameterType="person">
+        insert into person (
+        <include refid="base_column"/>
+        ) values (#{username},#{paqueryByIdssword},#{name})
+    </insert>
+
+    <select id="queryById" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="base_column"/> from person where username=#{value }
+    </select>
+
+
+</mapper>
