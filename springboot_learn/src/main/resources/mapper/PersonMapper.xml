@@ -21,5 +21,9 @@
         select <include refid="base_column"/> from person where username=#{value }
     </select>
 
+    <select id="select" resultMap="BaseResultMap">
+        select * from person
+    </select>
+
 
 </mapper>

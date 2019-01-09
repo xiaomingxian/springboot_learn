@@ -7,6 +7,8 @@ import xxm.dao.PersonMapper;
 import xxm.pojo.Person;
 import xxm.service.PersonService;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class PersonServiceImpl implements PersonService {
@@ -23,5 +25,11 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Person queryById(String id) {
         return personMapper.queryById(id);
+    }
+
+    @Override
+    public List select() {
+        return personMapper.select
+                ();
     }
 }

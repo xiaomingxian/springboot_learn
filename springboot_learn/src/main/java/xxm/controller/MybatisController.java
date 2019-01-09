@@ -8,6 +8,8 @@
  import xxm.pojo.Person;
  import xxm.service.PersonService;
 
+ import java.util.List;
+
  @Controller
  public class MybatisController {
 
@@ -21,6 +23,13 @@
      public void insert(@ModelAttribute Person person) {
          personService.insert(person);
 
+     }
+
+     @RequestMapping("select")
+     @ResponseBody
+     public List select() {
+         List list = personService.select();
+         return list;
      }
 
  }
