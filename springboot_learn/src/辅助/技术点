@@ -1,0 +1,4 @@
+ribbon是客户端[调用其他服务的服务]的负载均衡   会在请求发送前获取到服务实例[同一个服务可以设置多个实例]
+fegin 基于ribbon  @EnableFeignClients[客户端配置]
+                  @FeignClient(name = "SERVER") //会自动生成代理类[客户端接口配置--name为配置的服务短名称]
+nginx是服务端的负载均衡    负责请求转发[根据负载均衡算法]

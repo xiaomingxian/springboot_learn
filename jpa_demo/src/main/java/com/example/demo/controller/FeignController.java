@@ -14,7 +14,6 @@ public class FeignController {
     private FeignControllerInterface feignControllerInterface;
 
     @RequestMapping("feign_test")
-
     public Map feign_test() {
 
         Map map = feignControllerInterface.feignTest();
