@@ -77,11 +77,19 @@ eureka:
     instance-id: ${spring.application.name}:${server.port}
   client:
     service-url:
-#      hosts文件中配置的情况下使用这个
-#      defaultZone: ${SERVER_URL:http://eureka02:8888/eureka,http://eureka01:7777/eureka}
+      #      hosts文件中配置的情况下使用这个
+      #      defaultZone: ${SERVER_URL:http://eureka02:8888/eureka,http://eureka01:7777/eureka}
       defaultZone: ${SERVER_URL:http://localhost:8888/learn/eureka,http://localhost:7777/learn/eureka}
       register-with-eureka: true
       fetch-registry: true
     server:
       enable-self-preservation: false
       eviction-interval-timer-in-ms: 6000
+  #--------------- es ----------------
+  data:
+    elasticsearch:
+      cluster-name: master
+      cluster-nodes: localhost:9205
+      local: false
+      repositories:
+        enable: true
