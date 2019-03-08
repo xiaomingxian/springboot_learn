@@ -20,6 +20,7 @@
     <properties>
         <commons-lang3.version>3.1</commons-lang3.version>
         <log4j.version>1.2.17</log4j.version>
+        <activiti.version>7-201802-EA</activiti.version>
     </properties>
 
     <dependencyManagement>
@@ -150,7 +151,18 @@
             <artifactId>shiro-spring</artifactId>
             <version>1.3.2</version>
         </dependency>
-        <!--es-->
+        <!--activiti7-->
+        <!-- https://mvnrepository.com/artifact/org.activiti/activiti-engine -->
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-engine</artifactId>
+            <version>${activiti.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring</artifactId>
+            <version>${activiti.version}</version>
+        </dependency>
 
 
     </dependencies>
