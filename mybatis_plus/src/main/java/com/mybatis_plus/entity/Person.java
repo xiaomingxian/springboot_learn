@@ -1,4 +1,4 @@
-package entity;
+package com.mybatis_plus.entity;
 
 public class Person {
     private String username;
