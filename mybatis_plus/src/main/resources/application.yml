@@ -1,20 +1,29 @@
-#------------------端口，路径-------------
+#------------------ 端口，路径-------------
 server:
   port: 6666
   servlet:
-    context-path: /mybatisPlus
+    context-path: /mp
 #  -----------------数据源 ----------------
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/springboot_learn?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/springboot_learn?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
     driverClassName: com.mysql.jdbc.Driver
     username: root
     password: abc
+  mvc:
+    view:
+      suffix: .do
+## 页面默认前缀目录
+#mvc.view.prefix=/WEB-INF/jsp/
+## 响应页面默认后缀
+#spring.mvc.view.suffix=.jsp
+## 自定义属性，可以在Controller中读取
+#application.hello=Hello Angel From application
 #  ----------------  mybatis-plus----------------
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
-  #---entity location-
-  type-aliases-package: com.mybatis_plus.pojo
+  #---entity location- #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.mybatis_plus.pojo
 #----------------logger ----------------
 logging:
   level:
@@ -23,5 +32,4 @@ logging:
     sbmp:
     springbmp:
     dao: debug
-
-
+  config: classpath:logback-spring.xml
