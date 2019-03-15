@@ -7,12 +7,10 @@ server:
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/springboot_learn?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
-    driverClassName: com.mysql.jdbc.Driver
+    # Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'.
+    driverClassName: com.mysql.cj.jdbc.Driver
     username: root
     password: abc
-  mvc:
-    view:
-      suffix: .do
 ## 页面默认前缀目录
 #mvc.view.prefix=/WEB-INF/jsp/
 ## 响应页面默认后缀
@@ -27,9 +25,5 @@ mybatis-plus:
 #----------------logger ----------------
 logging:
   level:
-    com:
-    xsy:
-    sbmp:
-    springbmp:
-    dao: debug
+    root: debug
   config: classpath:logback-spring.xml
