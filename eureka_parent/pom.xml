@@ -8,10 +8,10 @@
         <version>1.4.0.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.parent.my_springboot</groupId>
-    <artifactId>parent</artifactId>
+    <groupId>com.springboot_learn</groupId>
+    <artifactId>eureka_parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>parent</name>
+    <name>eureka_parent</name>
     <packaging>pom</packaging>
     <description>Demo project for Spring Boot</description>
 

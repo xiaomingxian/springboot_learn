@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>war</packaging>
 
-    <groupId>springboot</groupId>
-    <artifactId>springboot_learn</artifactId>
+    <groupId>com.springboot_learn</groupId>
+    <artifactId>eureka_server</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <!--父工程 -->
     <parent>
-        <groupId>com.parent.my_springboot</groupId>
-        <artifactId>parent</artifactId>
+        <groupId>com.springboot_learn</groupId>
+        <artifactId>eureka_parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
