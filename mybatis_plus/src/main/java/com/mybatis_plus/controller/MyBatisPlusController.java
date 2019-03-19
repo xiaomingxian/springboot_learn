@@ -1,7 +1,6 @@
 package com.mybatis_plus.controller;
 
 import com.mybatis_plus.service.BaseService;
-import com.mybatis_plus.service.PersonService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @EnableAutoConfiguration
 public class MyBatisPlusController {
-
-    @Autowired
-    private PersonService personService;
 
     @Autowired
     private BaseService baseService;

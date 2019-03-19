@@ -1,14 +1,16 @@
 package com.mybatis_plus.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.mybatis_plus.pojo.Person;
+import com.baomidou.mybatisplus.service.IService;
 
+/**
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author xxm123
+ * @since 2019-03-19
+ */
 public interface PersonService extends IService<Person> {
-    /**
-     * 分页
-     */
-    Page<Person> queryPage(Page<Person> personPage);
-
 
 }

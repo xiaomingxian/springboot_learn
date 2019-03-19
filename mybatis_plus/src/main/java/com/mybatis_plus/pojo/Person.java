@@ -1,33 +1,35 @@
 package com.mybatis_plus.pojo;
 
-public class Person {
+import com.baomidou.mybatisplus.annotations.TableName;
+import lombok.Data;
+
+import java.io.Serializable;
+
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author xxm123
+ * @since 2019-03-19
+ */
+@Data
+@TableName("person")
+public class Person implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private String username;
-
     private String password;
-
     private String name;
 
-    public String getUsername() {
-        return username;
-    }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    @Override
+    public String toString() {
+        return "Person{" +
+        ", username=" + username +
+        ", password=" + password +
+        ", name=" + name +
+        "}";
     }
 }
