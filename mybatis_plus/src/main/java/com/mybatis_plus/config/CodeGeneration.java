@@ -26,9 +26,12 @@ public class CodeGeneration {
     public static void main(String[] args) {
         AutoGenerator mpg = new AutoGenerator();
 
+        //String windir="/Users/xxm/develop/workspace/springboot_learn/springboot_learn/mybatis_plus/src/main/java";
+        String macdir = "/Users/xxm/develop/workspace/springboot_learn/springboot_learn/mybatis_plus/src/main/java";
+        String dir = macdir;
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        gc.setOutputDir("D:\\develop\\ideaworkspeace\\springboot_learn\\mybatis_plus\\src\\main\\java");
+        gc.setOutputDir(dir);
         gc.setFileOverride(true);
         gc.setActiveRecord(false);// 不需要ActiveRecord特性的请改为false，true:service无需继承ServiceImpl--会生成一系列方法
         gc.setEnableCache(false);// XML 二级缓存
@@ -57,11 +60,21 @@ public class CodeGeneration {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setTablePrefix(new String[] { "" });// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[] { "person" }); // 需要生成的表
 
         strategy.setSuperServiceClass(null);
         strategy.setSuperServiceImplClass(null);
         strategy.setSuperMapperClass(null);
+        String[] tables = {
+                "user",
+                "role",
+                "user_role",
+                "permission",
+                "role_per",
+        };
+
+        strategy.setInclude(tables); // 需要生成的表
+
+
 
         mpg.setStrategy(strategy);
 
