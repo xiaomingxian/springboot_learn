@@ -44,6 +44,14 @@ public class PersonController {
         return personPage1;
     }
 
+    @GetMapping("entityQuery")
+    public Page entityQuery(Person person) {
+        EntityWrapper<Person> personEntityWrapper = new EntityWrapper<>();
+        Page<Person> personPage = new Page<>(1, 2);
+        Page<Person> personPage1 = personService.selectPage(personPage, personEntityWrapper);
+        return personPage1;
+    }
+
 
 }
 

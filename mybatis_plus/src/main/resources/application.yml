@@ -6,17 +6,26 @@ server:
 spring:
   aop:
     proxy-target-class: true
-
   datasource:
+    activiti:
+      url
     url: jdbc:mysql://localhost:3306/springboot_learn?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
     # Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'.
     driverClassName: com.mysql.cj.jdbc.Driver
     username: root
     password: abc
     profiles:
-
-
-#mybatis
+  #----------------- activiti ------------------
+  activiti:
+    url: jdbc:mysql://localhost:3306/activiti6?characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: abc
+    driver-class-name: com.mysql.jdbc.Driver
+    # 自动建表
+    database-schema: ACTIVITI
+    database-schema-update: true
+    history-level: full
+    db-history-used: true
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**Mapper.xml
   #实体扫描，多个package用逗号或者分号分隔
@@ -48,6 +57,21 @@ mybatis-plus:
 ##----------------logger ----------------
 logging:
   level:
-     root: info
+    root: info
 #  config: classpath:logback-spring.xml
+#activiti数据源
+#  spring.datasource.activiti.url=jdbc:mysql://localhost:3306/activiti?characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false
+#  spring.datasource.activiti.username=root
+#  spring.datasource.activiti.password=123456
+#  spring.datasource.activiti.driver-class-name=com.mysql.jdbc.Driver
+#  spring.datasource.activiti.maxActive=20
+#  spring.datasource.activiti.initialSize=5
+#  spring.datasource.activiti.minIdle=5
+#  spring.datasource.activiti.maxWait=60000
+#  spring.datasource.activiti.maxPoolPreparedStatementPerConnectionSize=20
+#  spring.datasource.activiti.timeBetweenEvictionRunsMillis=60000
+#  spring.datasource.activiti.minEvictableIdleTimeMillis=300000
+#  spring.datasource.activiti.poolPreparedStatements=true
+#
+
 

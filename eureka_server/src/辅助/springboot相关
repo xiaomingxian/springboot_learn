@@ -11,7 +11,6 @@ package为jar包  运行：java -jar name
 
 启动器[各个场景]：    **-start-**   :一系列的依赖组合   版本为：spring-boot-starter-parent ---> spring-boot-dependencies
 
-
-
 @Configuration 配置类上标注 相当于 配置文件  :配置类也是容器中的一个组件 用@Compont获取
 
+web 静态资源 /resources /public /static /META-INF/resources
