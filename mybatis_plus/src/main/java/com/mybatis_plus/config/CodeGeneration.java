@@ -26,9 +26,9 @@ public class CodeGeneration {
     public static void main(String[] args) {
         AutoGenerator mpg = new AutoGenerator();
 
-        //String windir="/Users/xxm/develop/workspace/springboot_learn/springboot_learn/mybatis_plus/src/main/java";
+        String windir="C:\\Users\\Administrator\\Desktop\\springboot_learn\\mybatis_plus\\src\\main\\java";
         String macdir = "/Users/xxm/develop/workspace/springboot_learn/springboot_learn/mybatis_plus/src/main/java";
-        String dir = macdir;
+        String dir = windir;
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         gc.setOutputDir(dir);

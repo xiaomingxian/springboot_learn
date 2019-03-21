@@ -1,8 +1,8 @@
-package com.mybatis_plus;
+package com.mybatis_plus.application;
 
 
 import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
-import org.activiti.spring.boot.SecurityAutoConfiguration;
+//import org.activiti.spring.boot.SecurityAutoConfiguration;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,8 +14,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 //SecurityAutoConfiguration与activiti冲突
-@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
-//@ComponentScan(basePackages = {"com.mybatis_plus.controller", "com.mybatis_plus.service", "com.mybatis_plus.config"})
+//@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
+@SpringBootApplication
+@ComponentScan(basePackages = {"com.mybatis_plus.controller", "com.mybatis_plus.service", "com.mybatis_plus.config"})
 //mybatis扫描使用
 @MapperScan(basePackages = {"com.mybatis_plus.dao"})//或者：@Mapper
 public class MyBatisPlusApplication {

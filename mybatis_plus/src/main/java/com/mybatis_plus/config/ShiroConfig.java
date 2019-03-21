@@ -25,16 +25,21 @@ public class ShiroConfig {
         credentialsMatcher.setHashAlgorithmName("MD5");
         //加密次数
         credentialsMatcher.setHashIterations(1024);
-        credentialsMatcher.setStoredCredentialsHexEncoded(true);
+        credentialsMatcher.setStoredCredentialsHexEncoded(true);//转化为16进制(与入库时保持一致)
         return credentialsMatcher;
     }
 
+    /**
+     * 加密待测试
+     * @param matcher
+     * @return
+     */
     @Bean("userRealm")
     public UserRealm userRealm(@Qualifier("hashedCredentialsMatcher")
                                        HashedCredentialsMatcher matcher) {
 
         UserRealm userRealm = new UserRealm();
-        userRealm.setCredentialsMatcher(matcher);
+        //userRealm.setCredentialsMatcher(matcher);
         return userRealm;
     }
 
@@ -48,7 +53,7 @@ public class ShiroConfig {
         // 设置登录成功跳转Url
         bean.setSuccessUrl("/main");
         // 设置登录跳转Url
-        bean.setLoginUrl("/toLogin");
+        bean.setLoginUrl("/login/cheak");
         // 设置未授权提示Url
         bean.setUnauthorizedUrl("/error/unAuth");
 
@@ -60,14 +65,17 @@ public class ShiroConfig {
          * role：对应角色权限可访问
          **/
         Map<String, String> filterMap = new LinkedHashMap<>();
-        filterMap.put("/login","anon");
-        filterMap.put("/user/index","authc");
-        filterMap.put("/vip/index","roles[vip]");
-        filterMap.put("/druid/**", "anon");
-        filterMap.put("/static/**","anon");
-
-        filterMap.put("/**","authc");
-        filterMap.put("/logout", "logout");
+        //filterMap.put("/login","anon");
+        //filterMap.put("/user/index","authc");
+        //filterMap.put("/vip/index","roles[vip]");
+        //filterMap.put("/druid/**", "anon");
+        //filterMap.put("/static/**","anon");
+        //filterMap.put("/swagger-ui.html/**","anon");
+        //filterMap.put("/swagger-resources/**","anon");
+        //filterMap.put("/login/**","anon");
+        //
+        //filterMap.put("/**","authc");
+        //filterMap.put("/logout", "logout");
 
         bean.setFilterChainDefinitionMap(filterMap);
         return bean;

@@ -16,16 +16,16 @@ spring:
     password: abc
     profiles:
   #----------------- activiti ------------------
-  activiti:
-    url: jdbc:mysql://localhost:3306/activiti6?characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false
-    username: root
-    password: abc
-    driver-class-name: com.mysql.jdbc.Driver
-    # 自动建表
-    database-schema: ACTIVITI
-    database-schema-update: true
-    history-level: full
-    db-history-used: true
+#  activiti:
+#    url: jdbc:mysql://localhost:3306/activiti6?characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false
+#    username: root
+#    password: abc
+#    driver-class-name: com.mysql.jdbc.Driver
+#    # 自动建表
+#    database-schema: ACTIVITI
+#    database-schema-update: true
+#    history-level: full
+#    db-history-used: true
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**Mapper.xml
   #实体扫描，多个package用逗号或者分号分隔
