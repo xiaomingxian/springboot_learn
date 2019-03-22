@@ -3,6 +3,7 @@ package com.mybatis_plus.realm;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.mybatis_plus.pojo.User;
 import com.mybatis_plus.service.UserService;
+import com.mybatis_plus.utils.MD5Util;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -64,7 +65,7 @@ public class UserRealm extends AuthorizingRealm {
 
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         EntityWrapper<User> personEntityWrapper = new EntityWrapper<>();
-        personEntityWrapper.where("userName={0}", token.getUsername());
+        personEntityWrapper.where("userName={0}", token.getPrincipal());
         User bean = userService.selectOne(personEntityWrapper);
 
         if (bean == null) {
@@ -73,9 +74,8 @@ public class UserRealm extends AuthorizingRealm {
 
         ByteSource credentialsSalt = ByteSource.Util.bytes(bean.getUsername());
 
-        //SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(bean, bean.getPassword(),credentialsSalt, getName());
-        //SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(bean.getUsername(), bean.getPassword(), ByteSource.Util.bytes(bean.getUsername()), getName());
-        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(bean.getUsername(), bean.getPassword(), getName());
+        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(bean, bean.getPassword(), getName());
+        //SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(bean, bean.getPassword(), credentialsSalt, getName());
 
         return simpleAuthenticationInfo;
     }

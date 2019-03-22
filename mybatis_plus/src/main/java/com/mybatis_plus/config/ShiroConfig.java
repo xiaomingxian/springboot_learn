@@ -19,33 +19,30 @@ public class ShiroConfig {
 
     @Bean("hashedCredentialsMatcher")
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
-        HashedCredentialsMatcher credentialsMatcher =
-                new HashedCredentialsMatcher();
+        HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
         //指定加密方式为MD5
-        credentialsMatcher.setHashAlgorithmName("MD5");
+        credentialsMatcher.setHashAlgorithmName("md5");
         //加密次数
-        credentialsMatcher.setHashIterations(1024);
-        credentialsMatcher.setStoredCredentialsHexEncoded(true);//转化为16进制(与入库时保持一致)
+        credentialsMatcher.setHashIterations(2);//加密次数  2: md5(md5(*))
+        //credentialsMatcher.setStoredCredentialsHexEncoded(true);//转化为16进制(与入库时保持一致)
         return credentialsMatcher;
     }
 
     /**
      * 加密待测试
+     *
      * @param matcher
      * @return
      */
     @Bean("userRealm")
-    public UserRealm userRealm(@Qualifier("hashedCredentialsMatcher")
-                                       HashedCredentialsMatcher matcher) {
-
+    public UserRealm userRealm(@Qualifier("hashedCredentialsMatcher")HashedCredentialsMatcher matcher) {
         UserRealm userRealm = new UserRealm();
-        //userRealm.setCredentialsMatcher(matcher);
+        userRealm.setCredentialsMatcher(matcher);
         return userRealm;
     }
 
     @Bean
-    public ShiroFilterFactoryBean shirFilter(@Qualifier("securityManager")
-                                                     DefaultWebSecurityManager securityManager) {
+    public ShiroFilterFactoryBean shirFilter(@Qualifier("securityManager")DefaultWebSecurityManager securityManager) {
 
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
         // 设置 SecurityManager
@@ -84,7 +81,7 @@ public class ShiroConfig {
     /**
      * 注入 securityManager
      */
-    @Bean(name="securityManager")
+    @Bean(name = "securityManager")
     public DefaultWebSecurityManager getDefaultWebSecurityManager(
             HashedCredentialsMatcher hashedCredentialsMatcher) {
 
