@@ -1,5 +1,5 @@
 server:
-  port: 10086
+  port: 8088
   servlet:
     context-path: /mp
 #spring

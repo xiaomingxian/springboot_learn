@@ -124,12 +124,12 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>1.3.1</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.activiti/activiti-spring-boot-starter-basic -->
-        <dependency>
-            <groupId>org.activiti</groupId>
-            <artifactId>activiti-spring-boot-starter</artifactId>
-            <version>7.0.97</version>
-        </dependency>
+        <!--activiti-->
+        <!--<dependency>-->
+            <!--<groupId>org.activiti</groupId>-->
+            <!--<artifactId>activiti-spring-boot-starter</artifactId>-->
+            <!--<version>7.0.97</version>-->
+        <!--</dependency>-->
 
         <!-- Shiro -->
         <dependency>
