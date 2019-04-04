@@ -2,6 +2,9 @@ server:
   port: 8088
   servlet:
     context-path: /mp
+#    restartProject persistenceSession yes or no
+    session:
+      persistent: false
 #spring
 spring:
   aop:

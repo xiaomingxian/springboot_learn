@@ -4,6 +4,7 @@ package com.mybatis_plus.controller;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.InvalidSessionException;
 import org.apache.shiro.session.Session;
@@ -22,7 +23,7 @@ public class LoginController {
 
         Subject subject = SecurityUtils.getSubject();
         AuthenticationToken token = new UsernamePasswordToken(name, password, true);
-
+        ((UsernamePasswordToken) token).setRememberMe(true);
         try {
 
             subject.login(token);
