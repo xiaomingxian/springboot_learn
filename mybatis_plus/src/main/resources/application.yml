@@ -2,7 +2,7 @@ server:
   port: 8088
   servlet:
     context-path: /mp
-#    restartProject persistenceSession yes or no
+    #    restartProject persistenceSession yes or no
     session:
       persistent: false
 #spring
@@ -16,15 +16,17 @@ spring:
     username: root
     password: abc
     profiles:
-  #  #----------------- activiti ------------------
+  #----------------- activiti ------------------
   activiti:
-    checkProcessDefinitions: false
-    url: jdbc:mysql://localhost:3306/springboot_learn_activiti?characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false
+    url: jdbc:mysql://localhost:3306/springboot_learn_activiti?characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&nullCatalogMeansCurrent=true
     username: root
     password: abc
     driver-class-name: com.mysql.jdbc.Driver
+    # ---- 多数据源配置时以下配置不生效--需手动配置
+    #    流程文件自动部署
+    checkProcessDefinitions: false
     # 自动建表
-#    database-schema: ACTIVITI
+    #    database-schema: ACTIVITI
     database-schema-update: true
     history-level: full
     db-history-used: true
