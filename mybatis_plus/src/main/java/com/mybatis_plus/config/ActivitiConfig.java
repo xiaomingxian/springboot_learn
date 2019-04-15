@@ -23,7 +23,6 @@ import java.io.IOException;
 public class ActivitiConfig extends AbstractProcessEngineAutoConfiguration {
 
     @Bean("activitiDataSource")
-    @Primary
     @ConfigurationProperties("spring.activiti")
     public DataSource activitiDataSource() {
 

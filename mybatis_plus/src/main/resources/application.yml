@@ -6,6 +6,7 @@ server:
     session:
       persistent: false
 #spring
+
 spring:
   aop:
     proxy-target-class: true
@@ -30,6 +31,13 @@ spring:
     database-schema-update: true
     history-level: full
     db-history-used: true
+  #    关闭activti认证,通过配置类
+  #  设置默认用户名和密码
+#  security:
+#    user:
+#      name: tom
+#      password: 123
+
 #------------------------ mybatisplus -------------------------
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**Mapper.xml

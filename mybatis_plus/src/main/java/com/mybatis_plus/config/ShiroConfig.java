@@ -42,7 +42,7 @@ public class ShiroConfig {
     @Bean("userRealm")
     public UserRealm userRealm(@Qualifier("hashedCredentialsMatcher") HashedCredentialsMatcher matcher) {
         UserRealm userRealm = new UserRealm();
-        userRealm.setCredentialsMatcher(matcher);
+        //userRealm.setCredentialsMatcher(matcher);
         return userRealm;
     }
 
@@ -107,10 +107,12 @@ public class ShiroConfig {
         //filterMap.put("/vip/index","roles[vip]");
         //filterMap.put("/druid/**", "anon");
         //filterMap.put("/static/**","anon");
-        //filterMap.put("/swagger-ui.html/**","anon");
-        //filterMap.put("/swagger-resources/**","anon");
         filterMap.put("/login/**", "anon");
         filterMap.put("/other.jpg", "anon");
+        filterMap.put("/v2/api-docs", "anon");
+        filterMap.put("/webjars/**", "anon");
+        filterMap.put("/swagger-ui.html/**", "anon");
+        filterMap.put("/swagger-resources/**", "anon");
         //
         filterMap.put("/**", "authc");
         //filterMap.put("/logout", "logout");

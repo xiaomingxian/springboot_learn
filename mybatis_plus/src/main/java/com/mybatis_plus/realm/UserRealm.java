@@ -3,7 +3,6 @@ package com.mybatis_plus.realm;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.mybatis_plus.pojo.User;
 import com.mybatis_plus.service.UserService;
-import com.mybatis_plus.utils.MD5Util;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
