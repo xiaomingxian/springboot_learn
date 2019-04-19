@@ -37,7 +37,6 @@ spring:
 #    user:
 #      name: tom
 #      password: 123
-
 #------------------------ mybatisplus -------------------------
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**Mapper.xml

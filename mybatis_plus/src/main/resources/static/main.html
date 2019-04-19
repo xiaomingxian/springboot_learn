@@ -2,11 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>首页</title>
 </head>
 <body>
+
 <center>
-    <h4>主页</h4>
+    <h4>在线流程编辑，模型定义</h4>
+    <form action="./modeler/create" method="post">
+        流程--名称： <input name="name" type="text"><br>
+        流程关键字： <input name="key" type="text"><br>
+        流程--描述： <input name="description" type="text"><br>
+        <input type="submit" value="确定">
+    </form>
+    <br>
+    <a href="./modeler/model/list">模型列表</a>
 </center>
 </body>
 </html>
