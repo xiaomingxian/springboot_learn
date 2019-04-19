@@ -138,7 +138,12 @@
             <artifactId>activiti-spring-boot-starter</artifactId>
             <version>7.0.97</version>
         </dependency>
-
+        <!-- Activiti 在线设计 -->
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-modeler</artifactId>
+            <version>5.22.0</version>
+        </dependency>
         <!-- Shiro -->
         <dependency>
             <groupId>org.apache.shiro</groupId>
@@ -171,3 +176,5 @@
 
 
 </project>
+
+

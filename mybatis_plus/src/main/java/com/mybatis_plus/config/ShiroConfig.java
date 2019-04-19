@@ -90,9 +90,9 @@ public class ShiroConfig {
         // 设置登录成功跳转Url
         bean.setSuccessUrl("/main.html");
         // 设置登录跳转Url
-        bean.setLoginUrl("/index.html");
+        bean.setLoginUrl("/shiro/index.html");
         // 设置未授权提示Url
-        bean.setUnauthorizedUrl("/error.html");
+        bean.setUnauthorizedUrl("/shiro/error.html");
 
         /**
          * anon：匿名用户可访问
@@ -108,7 +108,7 @@ public class ShiroConfig {
         //filterMap.put("/druid/**", "anon");
         //filterMap.put("/static/**","anon");
         filterMap.put("/login/**", "anon");
-        filterMap.put("/other.jpg", "anon");
+        filterMap.put("/shiro/other.jpg", "anon");
         filterMap.put("/v2/api-docs", "anon");
         filterMap.put("/webjars/**", "anon");
         filterMap.put("/swagger-ui.html/**", "anon");

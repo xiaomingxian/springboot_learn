@@ -9,10 +9,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
-import org.activiti.engine.repository.Deployment;
-import org.activiti.engine.repository.DeploymentQuery;
-import org.activiti.engine.repository.ProcessDefinition;
-import org.activiti.engine.repository.ProcessDefinitionQuery;
+import org.activiti.engine.repository.*;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -26,6 +23,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -89,6 +87,8 @@ public class ProcessController {
     //参数用类指定
     public CinSimpleResponse start(String key, String bussinessKey, @RequestParam(required = false) Map<String, Object> variables) {
 
+        variables.remove("key");
+        variables.remove("bussinessKey");
         runtimeService.startProcessInstanceByKey(key, bussinessKey, variables);
 
         log.info("-------------流程开启成功-------------");
@@ -169,9 +169,42 @@ public class ProcessController {
                     .latestVersion();
         }
         ProcessDefinition processDefinition = processDefinitionQuery.singleResult();
+        if (null == processDefinition) {
+            //流程不存在
+            return;
+        }
 
         String deploymentId = processDefinition.getDeploymentId();
-        outPic(httpServletResponse, deploymentId);
+
+        Model model = repositoryService.createModelQuery()
+                .deploymentId(deploymentId).singleResult();
+        if (null != model) {
+            getPic(httpServletResponse, model.getId());
+        } else {
+            outPic(httpServletResponse, deploymentId);
+        }
+    }
+
+
+    public void getPic(HttpServletResponse httpServletResponse, String modeId) {
+
+        byte[] modelEditorSourceExtra = repositoryService.getModelEditorSourceExtra(modeId);
+
+        try {
+            ServletOutputStream outputStream = httpServletResponse.getOutputStream();
+            //字节数组转字节输入流
+            ByteArrayInputStream is = new ByteArrayInputStream(modelEditorSourceExtra);
+            byte[] buf = new byte[1024];
+            int len = 0;
+            while ((len = is.read(buf)) != -1) {
+                outputStream.write(buf, 0, len);
+            }
+            is.close();
+            outputStream.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

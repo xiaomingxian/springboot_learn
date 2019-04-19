@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -28,8 +27,8 @@ public class T2_Task {
         String userName = "tom";
         List<Task> list = taskService.createTaskQuery()
                 //.taskAssignee(userName)
-                //.taskCandidateOrAssigned("跟人任务新用户")
-                .taskOwner("新用户")
+                .taskCandidateOrAssigned("新用户")
+                //.taskOwner("新用户")
                 .list();
         System.out.println(list);
         //boolean suspended = list.get(0).isSuspended();

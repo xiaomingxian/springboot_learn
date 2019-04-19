@@ -108,14 +108,14 @@ public class T1_Process {
     @Test
     public void showDefination() {
 
-        String definationKey = "T1";
+        String definationKey = "process";
         String depId = "1";
         List<ProcessDefinition> processDefinitions = repositoryService.createProcessDefinitionQuery()
                 .processDefinitionKey(definationKey)
                 //.deploymentId(depId)
                 //.latestVersion()//最新版本
-                //.list();
-                .listPage(0, 3);
+                .list();
+                //.listPage(0, 3);
         System.out.println("------->流程定义信息" + processDefinitions);
     }
 
