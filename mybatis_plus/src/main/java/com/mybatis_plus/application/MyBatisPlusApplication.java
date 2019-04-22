@@ -25,7 +25,7 @@ public class MyBatisPlusApplication {
         SpringApplication springApplication = new SpringApplication(MyBatisPlusApplication.class);
         springApplication.setBannerMode(Banner.Mode.CONSOLE);
         springApplication.run(args);
-        System.out.println("<----------------------> mybatis_plus 启动 <--------------------->");
+        System.out.println("<=====================================> mybatis_plus 启动 <=====================================>");
     }
 
     /**

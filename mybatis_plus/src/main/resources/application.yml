@@ -17,6 +17,10 @@ spring:
     username: root
     password: abc
     profiles:
+      schema: classpath:org/springframework/batch/core/schema-mysql.sql
+  #  启动项目执行以上位置sql
+  batch:
+    initialize-schema: always
   #----------------- activiti ------------------
   activiti:
     url: jdbc:mysql://localhost:3306/springboot_learn_activiti?characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&nullCatalogMeansCurrent=true
@@ -33,6 +37,7 @@ spring:
     db-history-used: true
   #    关闭activti认证,通过配置类
   #  设置默认用户名和密码
+
 #  security:
 #    user:
 #      name: tom

@@ -1,0 +1,6 @@
+batch_job_instance 如果一个实例执行失败，下次执行的还是它，但是batch_job_execution会多出一条
+
+batch_step_execution_context，batch_job_execution_context 执行的上下文，可以实现数据共享
+
+每个step执行正常完毕，状态会持久化到 数据库里 不可再执行   ？？？？
+    return new FlowBuilder<Flow>("flow-2").start(step5()).next(step5()).next(step6()).build();  2个step5()不断执行  ？？？？？
