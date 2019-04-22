@@ -15,8 +15,7 @@ public class MyJobExecutionDecider implements JobExecutionDecider {
         if (count % 2 == 0) {
             System.out.println("===========>偶数：" + count);
             return new FlowExecutionStatus("aaa");
-        }
-        else {
+        } else {
             System.out.println("===========>奇数：" + count);
             return new FlowExecutionStatus("bbb");
         }
