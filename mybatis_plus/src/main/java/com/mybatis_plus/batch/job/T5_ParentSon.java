@@ -8,6 +8,8 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.job.flow.Flow;
+import org.springframework.batch.core.launch.JobLauncher;
+import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.builder.JobStepBuilder;
 import org.springframework.batch.core.step.builder.StepBuilder;
@@ -15,8 +17,10 @@ import org.springframework.batch.core.step.job.JobStep;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.transaction.PlatformTransactionManagerCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 @EnableBatchProcessing
@@ -31,12 +35,15 @@ public class T5_ParentSon {
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
 
-    @Bean("parentSon")
-    public Job job() {
+    @Autowired
+    private JobLauncher jobLauncher;
 
-        return jobBuilderFactory.get("parent")
-                .start(son1())
-                .next(son2())
+    @Bean("parentSon")
+    public Job job(PlatformTransactionManager transactionManager, JobRepository jobRepository) {
+
+        return jobBuilderFactory.get("parent2-1")
+                .start(son1(transactionManager, jobRepository))
+                .next(son2(transactionManager, jobRepository))
                 .build();
 
     }
@@ -46,18 +53,28 @@ public class T5_ParentSon {
      *
      * @return
      */
-    private Step son2() {
-        return new JobStepBuilder(new StepBuilder("jobson2")).job(sonJ2()).build();
+    private Step son2(PlatformTransactionManager transactionManager, JobRepository jobRepository) {
+        return new JobStepBuilder(new StepBuilder("jobson2-2"))
+                .job(sonJ2())
+                .launcher(jobLauncher)
+                .repository(jobRepository)
+                .transactionManager(transactionManager)
+                .build();
     }
 
-    private Step son1() {
-        return new JobStepBuilder(new StepBuilder("jobson1")).job(sonJ1()).build();
+    private Step son1(PlatformTransactionManager transactionManager, JobRepository jobRepository) {
+        return new JobStepBuilder(new StepBuilder("jobson1-2"))
+                .job(sonJ1())
+                .launcher(jobLauncher)
+                .repository(jobRepository)
+                .transactionManager(transactionManager)
+                .build();
     }
 
     //job1
     public Job sonJ1() {
 
-        return jobBuilderFactory.get("sonJ1")
+        return jobBuilderFactory.get("sonJ1-2")
                 .start(st2())
                 .build();
 
@@ -66,18 +83,18 @@ public class T5_ParentSon {
     //job2
     public Job sonJ2() {
 
-        return jobBuilderFactory.get("sonJ2")
+        return jobBuilderFactory.get("sonJ2-2")
                 .start(st1())
                 .build();
 
     }
 
     private Step st1() {
-        return stepBuilderFactory.get("st1")
+        return stepBuilderFactory.get("st1-2")
                 .tasklet(new Tasklet() {
                     @Override
                     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
-                        System.out.println("=======>st1");
+                        System.out.println("=======>st1-2");
                         return RepeatStatus.FINISHED;
                     }
                 }).build();
@@ -85,11 +102,11 @@ public class T5_ParentSon {
 
 
     private Step st2() {
-        return stepBuilderFactory.get("st2")
+        return stepBuilderFactory.get("st2-2")
                 .tasklet(new Tasklet() {
                     @Override
                     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
-                        System.out.println("=======>st2");
+                        System.out.println("=======>st2-2");
                         return RepeatStatus.FINISHED;
                     }
                 }).build();

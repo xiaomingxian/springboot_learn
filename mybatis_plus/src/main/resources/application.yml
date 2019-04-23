@@ -21,6 +21,8 @@ spring:
   #  启动项目执行以上位置sql
   batch:
     initialize-schema: always
+    job:
+      names: parent2-1
   #----------------- activiti ------------------
   activiti:
     url: jdbc:mysql://localhost:3306/springboot_learn_activiti?characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&nullCatalogMeansCurrent=true
