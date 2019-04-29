@@ -21,9 +21,9 @@ spring:
   #  启动项目执行以上位置sql
   batch:
     initialize-schema: always
-#    job:
-#      names: parent2-1
-  #----------------- activiti ------------------
+  #    job:
+  #      names: parent2-1
+  #--------------------------------------------- activiti ----------------------------------------------
   activiti:
     url: jdbc:mysql://localhost:3306/springboot_learn_activiti?characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&nullCatalogMeansCurrent=true
     username: root
@@ -39,12 +39,25 @@ spring:
     db-history-used: true
   #    关闭activti认证,通过配置类
   #  设置默认用户名和密码
-
-#  security:
-#    user:
-#      name: tom
-#      password: 123
-#------------------------ mybatisplus -------------------------
+  #  security:
+  #    user:
+  #      name: tom
+  #      password: 123
+  #  ------------------------------------------ activemq ---------------------------------------------
+  activemq:
+    broker-url: tcp://192.168.37.129:61616
+    #    是否使用内置mq   默认代理URL是否应该在内存中。如果指定了显式代理，则忽略此值。
+    in-memory: false
+    # 是否在回滚回滚消息之前停止消息传递。这意味着当启用此命令时，消息顺序不会被保留。
+    non-blocking-redelivery: false
+    user: admin
+    password: admin
+    # 等待消息发送响应的时间。设置为0等待永远。
+    send-timeout: 0
+#  jms:
+#    开启发布订阅-----已经通过编码配置了 queue 与 topic 同时存在
+#    pub-sub-domain: true
+#---------------------------------------------------- mybatisplus ---------------------------------------
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**Mapper.xml
   #实体扫描，多个package用逗号或者分号分隔
@@ -73,9 +86,8 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
 
-##----------------logger ----------------
+##--------------------------------------------logger --------------------------------------------
 logging:
   level:
     root: info
 #  config: classpath:logback-spring.xml
-
