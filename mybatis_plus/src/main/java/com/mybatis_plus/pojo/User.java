@@ -23,6 +23,11 @@ public class User implements Serializable {
     private String username;
     private String password;
 
+    public User(Integer uid, String username, String password) {
+        this.uid = uid;
+        this.username = username;
+        this.password = password;
+    }
 
     public Integer getUid() {
         return uid;

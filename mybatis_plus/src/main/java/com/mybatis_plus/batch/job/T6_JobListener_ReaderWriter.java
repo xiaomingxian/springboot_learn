@@ -19,7 +19,7 @@ import java.util.List;
 
 @Configuration
 @EnableBatchProcessing
-public class T6_JobListener {
+public class T6_JobListener_ReaderWriter {
 
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
