@@ -161,7 +161,9 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-batch</artifactId>
+            <version>2.1.2.RELEASE</version>
         </dependency>
+
         <!-- 整合activceMq -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

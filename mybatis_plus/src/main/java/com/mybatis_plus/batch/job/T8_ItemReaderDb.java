@@ -38,24 +38,27 @@ public class T8_ItemReaderDb {
 
     @Bean
     public Job jobDb() {
-        return jobBuilderFactory.get("jobDb").start(stepDb())
+        return jobBuilderFactory.get("jobDb2").start(stepDb())
                 .build();
     }
 
     @Bean
-    //@StepScope//待解决
     public Step stepDb() {
         return stepBuilderFactory.get("stepDb")
                 .<User, User>chunk(2)
                 .reader(readerDb())
-                .writer(list -> list.forEach(System.out::println))
+                .writer(list -> {
+                    System.out.println("--------->读取数据库中查出的数据");
+                    list.stream().forEach(System.out::println);
+                })
                 .build();
     }
 
 
-    private ItemReader<User> readerDb() {
+    @Bean
+    @StepScope
+    public ItemReader<User> readerDb() {
         JdbcPagingItemReader<User> itemReader = new JdbcPagingItemReader<>();
-        System.out.println("==========>data"+dataSource);
         itemReader.setDataSource(dataSource);
         itemReader.setFetchSize(2);//每次读取两条
         //数据库中的数据映射到实体类
@@ -63,8 +66,10 @@ public class T8_ItemReaderDb {
             @Override
             public User mapRow(ResultSet resultSet, int i) throws SQLException {
                 //resultSet数据库一条结果集，i当前行
-                return
-                        new User(resultSet.getInt("uid"), resultSet.getString("username"), resultSet.getString("password"));
+                return new User(resultSet.getInt("uid"),
+                        resultSet.getString("username"),
+                        resultSet.getString("password"));
+
             }
         });
         MySqlPagingQueryProvider provider = new MySqlPagingQueryProvider();
