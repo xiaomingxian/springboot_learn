@@ -163,6 +163,22 @@
             <artifactId>spring-boot-starter-batch</artifactId>
             <version>2.1.2.RELEASE</version>
         </dependency>
+        <!--xml 与对象转换-->
+        <!--xml<dependency>-->
+        <!--<groupId>org.springframework</groupId>-->
+        <!--<artifactId>org.springframework.oxm</artifactId>-->
+        <!--<version>3.2.1.RELEASE</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-oxm</artifactId>
+        </dependency>
+        <!-- 转换xml   https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream -->
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.4.11.1</version>
+        </dependency>
 
         <!-- 整合activceMq -->
         <dependency>
@@ -171,6 +187,11 @@
             <version>2.1.4.RELEASE</version>
         </dependency>
 
+        <!-- elasticsearch启动器 (必须)-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+        </dependency>
 
     </dependencies>
     <build>
@@ -184,6 +205,12 @@
                     <fork>true</fork>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok-maven-plugin</artifactId>
+                <version>1.16.6.1</version>
+            </plugin>
+
         </plugins>
     </build>
 

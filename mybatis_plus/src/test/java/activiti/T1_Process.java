@@ -1,4 +1,4 @@
-package basepackage.activiti;
+package activiti;
 
 import com.mybatis_plus.application.MyBatisPlusApplication;
 import com.mybatis_plus.pojo.User;

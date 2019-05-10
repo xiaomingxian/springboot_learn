@@ -44,19 +44,19 @@ spring:
   #      name: tom
   #      password: 123
   #  ------------------------------------------ activemq ---------------------------------------------
-  activemq:
-    broker-url: tcp://192.168.37.129:61616
-    #    是否使用内置mq   默认代理URL是否应该在内存中。如果指定了显式代理，则忽略此值。
-    in-memory: false
-    # 是否在回滚回滚消息之前停止消息传递。这意味着当启用此命令时，消息顺序不会被保留。
-    non-blocking-redelivery: false
-    user: admin
-    password: admin
-    # 等待消息发送响应的时间。设置为0等待永远。
-    send-timeout: 0
-#  jms:
-#    开启发布订阅-----已经通过编码配置了 queue 与 topic 同时存在
-#    pub-sub-domain: true
+#  activemq:
+#    broker-url: tcp://192.168.37.129:61616
+#    #    是否使用内置mq   默认代理URL是否应该在内存中。如果指定了显式代理，则忽略此值。
+#    in-memory: false
+#    # 是否在回滚回滚消息之前停止消息传递。这意味着当启用此命令时，消息顺序不会被保留。
+#    non-blocking-redelivery: false
+#    user: admin
+#    password: admin
+#    # 等待消息发送响应的时间。设置为0等待永远。
+#    send-timeout: 0
+##  jms:
+##    开启发布订阅-----已经通过编码配置了 queue 与 topic 同时存在
+##    pub-sub-domain: true
 #---------------------------------------------------- mybatisplus ---------------------------------------
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**Mapper.xml
