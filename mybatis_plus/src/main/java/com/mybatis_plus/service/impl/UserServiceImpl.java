@@ -5,6 +5,7 @@ import com.mybatis_plus.dao.UserMapper;
 import com.mybatis_plus.service.UserService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
