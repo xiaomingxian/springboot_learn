@@ -1,0 +1,1 @@
+maven构建项目：artifact消失 如果 maven->importing->import maven projects automatically 已经勾选 刷新maven即可
