@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * 自定义Realm，实现授权与认证
  */
-public class UserRealm extends AuthorizingRealm {
+public class UserRealme extends AuthorizingRealm {
 
     @Autowired
     private UserService userService;

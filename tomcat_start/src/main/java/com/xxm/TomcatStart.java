@@ -7,7 +7,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({"com.xxm","com.xxmst"})
+//@ComponentScan({"com.xxm","com.xxmst"})
 public class TomcatStart extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
