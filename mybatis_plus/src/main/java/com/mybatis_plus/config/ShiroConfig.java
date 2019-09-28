@@ -1,6 +1,6 @@
 package com.mybatis_plus.config;
 
-import com.mybatis_plus.realm.UserRealm;
+import com.mybatis_plus.realm.UserRealme;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.RememberMeManager;
@@ -8,7 +8,6 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,10 +25,10 @@ public class ShiroConfig {
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
         HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
         //指定加密方式为MD5
-        credentialsMatcher.setHashAlgorithmName("md5");
+        credentialsMatcher.setHashAlgorithmName("MD5");
         //加密次数
-        credentialsMatcher.setHashIterations(2);//加密次数  2: md5(md5(*))
-        //credentialsMatcher.setStoredCredentialsHexEncoded(true);//转化为16进制(与入库时保持一致)
+        credentialsMatcher.setHashIterations(1024);
+        credentialsMatcher.setStoredCredentialsHexEncoded(true);
         return credentialsMatcher;
     }
 
@@ -39,11 +38,12 @@ public class ShiroConfig {
      * @param matcher
      * @return
      */
-    @Bean("userRealm")
-    public UserRealm userRealm(@Qualifier("hashedCredentialsMatcher") HashedCredentialsMatcher matcher) {
-        UserRealm userRealm = new UserRealm();
-        //userRealm.setCredentialsMatcher(matcher);
-        return userRealm;
+    @Bean("userRealme")
+    public UserRealme userRealme(@Qualifier("hashedCredentialsMatcher") HashedCredentialsMatcher matcher) {
+        UserRealme userRealme = new UserRealme();
+        userRealme.setAuthorizationCachingEnabled(false);
+        userRealme.setCredentialsMatcher(matcher);
+        return userRealme;
     }
 
 
@@ -125,14 +125,16 @@ public class ShiroConfig {
      * 注入 securityManager
      */
     @Bean(name = "securityManager")
-    public DefaultWebSecurityManager getDefaultWebSecurityManager(HashedCredentialsMatcher hashedCredentialsMatcher,
-                                                                  @Qualifier("rememberMeManager") RememberMeManager rememberMeManager) {
+    public DefaultWebSecurityManager getDefaultWebSecurityManager(
+            @Qualifier("rememberMeManager") RememberMeManager rememberMeManager,
+            @Qualifier("userRealme") UserRealme userRealme
+    ) {
 
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         //remembercookie里有用户信息----shiro会进行加密解密
         securityManager.setRememberMeManager(rememberMeManager);
         // 关联realm.
-        securityManager.setRealm(userRealm(hashedCredentialsMatcher));
+        securityManager.setRealm(userRealme);
         return securityManager;
     }
 }
