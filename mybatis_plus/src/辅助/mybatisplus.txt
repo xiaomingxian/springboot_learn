@@ -1,1 +1,4 @@
 引入 MyBatis-Plus 之后请不要再次引入 MyBatis 以及 MyBatis-Spring，以避免因版本差异导致的问题。
+
+
+排除属性的方法：1/transient关键字不参与序列化 2/static[lombok不会生成get/set需要手动生成]  3/@TableField(exist = false)
