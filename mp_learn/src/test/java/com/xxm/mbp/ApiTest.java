@@ -1,7 +1,9 @@
 package com.xxm.mbp;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xxm.mbp.dao.UserMapper;
 import com.xxm.mbp.pojo.User;
 import org.junit.Test;
@@ -13,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -90,6 +93,71 @@ public class ApiTest {
         //select  * from user where username like 'to%' and (password>1234 or uid is not null)
         query.likeRight("username", "to").and(wp -> wp.lt("password", "1234").or().isNotNull("uid"));
         userMapper.selectList(query).stream().forEach(System.out::println);
+
+    }
+
+    /**
+     * update
+     */
+    @Test
+    public void update() {
+        User user = new User();
+        user.setName("Jemmi");
+        user.setPassword("123456");
+
+        QueryWrapper<User> query = Wrappers.query();
+        query.eq("username", "update-test");
+        //wrapper为null更新所有数据
+        userMapper.update(user, query);
+
+    }
+
+    @Test
+    public void selectOne() {
+        QueryWrapper<User> query = Wrappers.query();
+        //如果结果非唯一
+        query.eq("username", "Jemmi").last("limit 1");
+        userMapper.selectOne(query);
+
+    }
+
+    @Test
+    public void selectTest() {
+        QueryWrapper<User> query = Wrappers.query();
+        query.eq("username", "Jemmi");
+        List<Map<String, Object>> maps = userMapper.selectMaps(query);
+        maps.stream().forEach(System.out::println);
+
+        System.out.println("--------");
+        QueryWrapper<User> query1 = Wrappers.query();
+        query.eq("username", "tom");
+        //只返回第一个字段的值--默认排序？
+        List<Object> objects = userMapper.selectObjs(query1);
+        System.out.println("~~~~~" + objects);
+        objects.stream().forEach(System.out::println);
+    }
+
+
+    @Test
+    public void pageTest() {
+        IPage<User> page = new Page<>();
+        page.setCurrent(2);
+        page.setSize(5);
+
+        IPage<User> userIPage = userMapper.selectPage(page, null);
+        userIPage.getRecords().stream().forEach(System.out::println);
+        System.out.println("---------- pageMap ------------");
+        IPage<Map<String, Object>> mapIPage = userMapper.selectMapsPage(page, null);
+        mapIPage.getRecords().stream().forEach(System.out::println);
+
+    }
+
+    @Test
+    public void other() {
+
+
+
+
 
     }
 
