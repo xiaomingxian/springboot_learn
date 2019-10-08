@@ -1,9 +1,12 @@
 package com.xxm.mbp;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.additional.query.impl.LambdaQueryChainWrapper;
 import com.xxm.mbp.dao.UserMapper;
 import com.xxm.mbp.pojo.User;
 import org.junit.Test;
@@ -153,11 +156,89 @@ public class ApiTest {
     }
 
     @Test
-    public void other() {
+    public void selectPartOfColumn() {
+
+        QueryWrapper<User> query = Wrappers.query();
+        //method1 正向选择
+        query.select("uid", "username");
+        List<User> users = userMapper.selectList(query);
+        users.stream().forEach(System.out::println);
+        //method2 逆向排除
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        //主键无法排除？
+        wrapper.select(User.class, info -> !info.getColumn().equals("password") && !info.getColumn().equals("username"));
+        userMapper.selectList(wrapper).stream().forEach(System.out::println);
+
+    }
+
+    @Test
+    public void conditionTest() {
+        //lt/eq 等方法内部都有重载 第一个参数是boolean类型(condition[true表示加入查询条件/反之相反])
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        String name = "tom";
+        //String name = "";
+        wrapper.eq(StringUtils.isNotEmpty(name), "username", name);
+        userMapper.selectList(wrapper).stream().forEach(System.out::println);
+    }
+
+    @Test
+    public void entityQuery() {
+        //    @TableField(condition = SqlCondition.LIKE)//指定字段查询属性//需要自定义直接 condition = "xxxx"
+        //自动控制过滤
+        User user = new User();
+        user.setName("tom");
+        QueryWrapper<User> wrapper = new QueryWrapper<>(user);
+        userMapper.selectList(wrapper).stream().forEach(System.out::println);
+    }
+
+    @Test
+    public void allEq() {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("username", "tom");
+        map.put("uid", null);
+
+        //wrapper.allEq(map);
+        wrapper.allEq(map, false);//过滤null
+        //字段过滤
+        wrapper.allEq((k, v) -> !k.equals("username"), map);
+
+        userMapper.selectList(wrapper).stream().forEach(System.out::println);
+    }
+
+    @Test
+    public void selectByMap() {
+        //别名
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.select("max(uid) max_val", "min(password) min_val").groupBy("uid");
+        userMapper.selectMaps(wrapper).stream().forEach(System.out::println);
+    }
+
+    /**
+     * selectObj只会返回第一个字段
+     * selectCount/selectOne略
+     */
 
 
+    @Test
+    public void selectLambda() {
+        //创建方式 3种
+        //    LambdaQueryWrapper<User> lambda = new QueryWrapper<User>().lambda();
+        LambdaQueryWrapper<User> userLambdaQueryWrapper2 = new LambdaQueryWrapper<>();
+        LambdaQueryWrapper<User> userLambdaQueryWrapper = Wrappers.<User>lambdaQuery();
+        userLambdaQueryWrapper.eq(User::getName, "tom").gt(User::getPassword, 0);
+        userMapper.selectMaps(userLambdaQueryWrapper).stream().forEach(System.out::println);
 
 
+        //多条件拼接
+        System.out.println("-------------------");
+        userLambdaQueryWrapper2.likeRight(User::getName, "to").and(lqw -> lqw.eq(User::getPassword, "123456"));
+        userMapper.selectList(userLambdaQueryWrapper2).stream().forEach(System.out::println);
+    }
+
+    @Test
+    public void lambda2() {
+        new LambdaQueryChainWrapper<User>(userMapper).eq(User::getName, "tom").list().forEach(System.out::println);
 
     }
 

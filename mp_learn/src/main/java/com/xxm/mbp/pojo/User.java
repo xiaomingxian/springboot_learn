@@ -1,6 +1,7 @@
 package com.xxm.mbp.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.SqlCondition;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -27,7 +28,7 @@ public class User extends Model<User> {
     @TableId(value = "uid", type = IdType.AUTO)
     private Integer uid;
 
-    @TableField(value = "username")
+    @TableField(value = "username",condition = SqlCondition.LIKE)
     private String name;
 
     private String password;
