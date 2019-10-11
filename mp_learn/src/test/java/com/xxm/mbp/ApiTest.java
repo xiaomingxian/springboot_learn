@@ -1,5 +1,6 @@
 package com.xxm.mbp;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -11,10 +12,12 @@ import com.xxm.mbp.dao.UserMapper;
 import com.xxm.mbp.pojo.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.omg.CORBA.IDLType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.sql.Wrapper;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -141,19 +144,6 @@ public class ApiTest {
     }
 
 
-    @Test
-    public void pageTest() {
-        IPage<User> page = new Page<>();
-        page.setCurrent(2);
-        page.setSize(5);
-
-        IPage<User> userIPage = userMapper.selectPage(page, null);
-        userIPage.getRecords().stream().forEach(System.out::println);
-        System.out.println("---------- pageMap ------------");
-        IPage<Map<String, Object>> mapIPage = userMapper.selectMapsPage(page, null);
-        mapIPage.getRecords().stream().forEach(System.out::println);
-
-    }
 
     @Test
     public void selectPartOfColumn() {
@@ -242,7 +232,84 @@ public class ApiTest {
 
     }
 
+    /**
+     * sqlMy
+     */
+    @Test
+    public void sqlMy() {
+        List<User> list = userMapper.selectMy(Wrappers.<User>lambdaQuery().eq(User::getName, "tom"));
+        list.stream().forEach(System.out::println);
+
+        Wrapper w = null;
+    }
 
 
+    /**
+     * page
+     * selectPage / selectMapPage
+     */
+    @Test
+    public void pageTest() {
+        //2条sql:查总数与查数据
+        IPage<User> page = new Page<>();
+        page.setCurrent(2);
+        page.setSize(5);
+
+        IPage<User> userIPage = userMapper.selectPage(page, null);
+        userIPage.getRecords().stream().forEach(System.out::println);
+        System.out.println("---------- pageMap ------------");
+        IPage<Map<String, Object>> mapIPage = userMapper.selectMapsPage(page, null);
+        mapIPage.getRecords().stream().forEach(System.out::println);
+
+        System.out.println("--------- 只查数据 ----------");
+        //只查数据
+        Page<User> userPage = new Page<>(1, 10, false);
+        userMapper.selectPage(userPage, null);
+
+        System.out.println("---------自定义page查询 ------------");
+        userMapper.selectPageMy(userPage, new QueryWrapper<User>()).stream().forEach(i -> {
+            System.out.println("--->mypage:" + i);
+        });
+
+    }
+
+    /**
+     * AR模式
+     */
+    @Test
+    public void ARMOdel() {
+        User user = new User();
+        user.setName("Ar-Model");
+        user.setPassword("pass");
+        boolean flag = user.insert();
+        System.out.println(flag);
+        //    select
+        System.out.println("---------- select ------------");
+        User user1 = new User();
+        user1.setUid(1);
+
+        User user2 = user1.selectById();
+        System.out.println(user2);
+
+        User user3 = new User().selectById(1);
+        System.out.println(user3);
+        //update/delete/insertOrUpdate略
+
+    }
+    /**
+     * 主键策略
+     *
+     */
+
+    @Test
+    public void id(){
+        //1局部主键策略  @TableId(value = "uid", type = IdType.AUTO)
+        //IdType.ID_WORKER_STR//基于雪花算法的自增主键
+
+    //2全局主键策略
+    //    global-config:
+    //#主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+    //    id-type: 2
+    }
 
 }

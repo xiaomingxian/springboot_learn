@@ -21,4 +21,12 @@ public class MybatisPlusConfig {
         // paginationInterceptor.setLimit(你的最大单页限制数量，默认 500 条，小于 0 如 -1 不受限制);
         return paginationInterceptor;
     }
+
+    /**
+     * 逻辑删除  高版本不需要
+     */
+    //@Bean
+    //public ISqlInjector iSqlInjector(){
+    //    return new LogS
+    //}
 }
