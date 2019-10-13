@@ -34,6 +34,24 @@ public class ApiHight {
         //排除逻辑删除字段的展示
         //@TableField(select = false)
 
+        //自定义sql不会加入逻辑删除过滤
+    }
+
+    @Test
+    public void fill(){
+        Person person = new Person();
+        person.setName("填充测试");
+        person.setUsername("tom");
+        person.setPassword("11111");
+        //person.insert();
+
+
+        person.setUsername("更新信息");
+        person.setId(7L);
+        person.updateById();
+
+
+
     }
 
 }
