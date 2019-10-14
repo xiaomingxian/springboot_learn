@@ -43,6 +43,9 @@ public class Person extends Model<Person> {
     @TableField(select = false)
     private int deleted;
 
+    @Version
+    private int version;
+
 
     @Override
     protected Serializable pkVal() {
