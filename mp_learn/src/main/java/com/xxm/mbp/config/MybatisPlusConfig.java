@@ -3,6 +3,8 @@ package com.xxm.mbp.config;
 import com.baomidou.mybatisplus.core.parser.ISqlParser;
 import com.baomidou.mybatisplus.core.parser.ISqlParserFilter;
 import com.baomidou.mybatisplus.core.parser.SqlParserHelper;
+import com.baomidou.mybatisplus.extension.parsers.DynamicTableNameParser;
+import com.baomidou.mybatisplus.extension.parsers.ITableNameHandler;
 import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
@@ -19,6 +21,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 //Spring boot方式
@@ -26,6 +29,10 @@ import java.util.List;
 @Configuration
 @MapperScan("com.xxm.mbp.*.mapper*")
 public class MybatisPlusConfig {
+
+    public static ThreadLocal<String> TABLE_NAME = new ThreadLocal<String>();
+
+
 
 
     //@ConfigurationProperties("mybatis-plus")
@@ -77,7 +84,6 @@ public class MybatisPlusConfig {
             }
         });
         sqlParserList.add(tenantSqlParser);
-        paginationInterceptor.setSqlParserList(sqlParserList);
 
         paginationInterceptor.setSqlParserFilter(new ISqlParserFilter() {
             @Override
@@ -91,6 +97,21 @@ public class MybatisPlusConfig {
             }
         });
 
+        //-------------------------动态表名--------------------------------
+        DynamicTableNameParser dynamicTableNameParser = new DynamicTableNameParser();
+        HashMap<String, ITableNameHandler> map = new HashMap<>();
+        map.put("person", new ITableNameHandler() {
+            @Override
+            public String dynamicTableName(MetaObject metaObject, String sql, String tableName) {
+                return TABLE_NAME.get();
+            }
+        });
+
+        dynamicTableNameParser.setTableNameHandlerMap(map);
+        sqlParserList.add(dynamicTableNameParser);
+
+        //----------------------------------------------------------
+        paginationInterceptor.setSqlParserList(sqlParserList);
 
         return paginationInterceptor;
     }

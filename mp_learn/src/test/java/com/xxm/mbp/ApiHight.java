@@ -1,6 +1,7 @@
 package com.xxm.mbp;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.xxm.mbp.config.MybatisPlusConfig;
 import com.xxm.mbp.dao.PersonMapper;
 import com.xxm.mbp.pojo.Person;
 import org.junit.Test;
@@ -110,6 +111,19 @@ public class ApiHight {
 
         System.out.println("--------------->自定义注解");
         personMapper.selectFilter().stream().forEach(System.out::println);
+    }
+
+    /**
+     * 动态表明
+     */
+    @Test
+    public void dymicTableName() {
+
+        MybatisPlusConfig.TABLE_NAME.set("person_2019-10-16");
+        List<Person> people = personMapper.selectList(null);
+        people.stream().forEach(System.out::println);
+
+
     }
 
 }
