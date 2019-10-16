@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -33,9 +33,11 @@ public class Person extends Model<Person> {
 
     private String name;
     @TableField(value = "create_time",fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
+    //private LocalDateTime createTime;
+    private Date createTime;//低版本默认是java.util.Date
     @TableField(value = "update_time",fill = FieldFill.UPDATE)
-    private LocalDateTime updateTime;
+    //private LocalDateTime updateTime;
+    private Date updateTime;
     /**
      * 逻辑删除
      */
@@ -45,6 +47,10 @@ public class Person extends Model<Person> {
 
     @Version
     private int version;
+
+
+    @TableField(value = "tenant_id")
+    private int zuhu;
 
 
     @Override

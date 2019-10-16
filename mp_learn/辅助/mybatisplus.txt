@@ -2,3 +2,9 @@
 
 
 排除属性的方法：1/transient关键字不参与序列化 2/static[lombok不会生成get/set需要手动生成]  3/@TableField(exist = false)
+
+
+多租户：
+    1 独立数据库
+    2 共享数据库，共享Schema
+    3 共享数据库，共享数据架构：：这是第三种方案，即租户共享同一个Database、同一个Schema，但在表中通过TenantID区分租户的数据。这是共享程度最高、隔离级别最低的模式。

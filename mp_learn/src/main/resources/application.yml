@@ -8,12 +8,16 @@ server:
 #spring
 
 spring:
+  profiles:
+    active: pro
   aop:
     proxy-target-class: true
   datasource:
     url: jdbc:mysql://localhost:3306/springboot_learn?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     # Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'.
     driverClassName: com.mysql.cj.jdbc.Driver
+    #    url: jdbc:p6spy:mysql://localhost:3306/springboot_learn?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    #    driverClassName: com.p6spy.engine.spy.P6SpyDriver
     username: root
     password: abc
 mybatis-plus:
@@ -36,6 +40,7 @@ mybatis-plus:
     #逻辑删除配置（下面3个配置）
     logic-delete-value: 0
     logic-not-delete-value: 1
+
     #自定义SQL注入器
     #sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
     #自定义填充策略接口实现

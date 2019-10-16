@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ApiHight {
@@ -95,8 +97,19 @@ public class ApiHight {
         person3.setUsername("版本3");
         person3.setVersion(version3);
         personMapper.update(person3, personQueryWrapper);
+    }
 
 
+    /**
+     * 多租户
+     */
+    @Test
+    public void duoZuHu() {
+        List<Person> people = personMapper.selectList(null);
+        people.stream().forEach(System.out::println);
+
+        System.out.println("--------------->自定义注解");
+        personMapper.selectFilter().stream().forEach(System.out::println);
     }
 
 }
