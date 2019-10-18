@@ -120,10 +120,23 @@ public class ApiHight {
     public void dymicTableName() {
 
         MybatisPlusConfig.TABLE_NAME.set("person_2019-10-16");
+        //加了 @SqlParser(filter = true) 动态表名也会失效
         List<Person> people = personMapper.selectList(null);
         people.stream().forEach(System.out::println);
+    }
 
+    /**
+     * sql注入器
+     * 1 创建定义方法的类
+     * 2 创建注入器
+     * 3 在mapper中加入自定义方法
+     */
+    @Test
+    public void sqlInter() {
 
+        Integer count = personMapper.selectCountTotal();
+
+        System.out.println("------>"+count);
     }
 
 }

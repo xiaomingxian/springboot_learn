@@ -22,4 +22,8 @@ public interface PersonMapper extends BaseMapper<Person> {
     @Select("select * from person")
     List<Person> selectFilter();
 
+
+    @SqlParser(filter = true)
+    Integer selectCountTotal();
+
 }
