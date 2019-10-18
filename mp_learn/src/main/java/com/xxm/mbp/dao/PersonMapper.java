@@ -18,12 +18,27 @@ import java.util.List;
 public interface PersonMapper extends BaseMapper<Person> {
 
 
-    @SqlParser(filter = true)//不查租户信息
+    /**
+     * SqlParser(filter = true) 不查租户信息
+     *
+     * @return
+     */
+    //@SqlParser(filter = true)
     @Select("select * from person")
     List<Person> selectFilter();
 
-
+    /**
+     * 自定义sql注入方法
+     *
+     * @return
+     */
     @SqlParser(filter = true)
     Integer selectCountTotal();
+
+    /**
+     * 官方注入方法
+     * @param list
+     */
+    void insertBatchSomeColumn(List<Person> list);
 
 }

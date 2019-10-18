@@ -13,6 +13,7 @@ import com.baomidou.mybatisplus.extension.plugins.tenant.TenantSqlParser;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.LongValue;
 import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.reflection.MetaObject;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
@@ -89,6 +90,13 @@ public class MybatisPlusConfig {
             @Override
             public boolean doFilter(MetaObject metaObject) {
                 MappedStatement ms = SqlParserHelper.getMappedStatement(metaObject);
+                SqlCommandType sqlCommandType = ms.getSqlCommandType();
+
+                //插入与更新时过滤 租户字段 [不这样会生成的sql会有两个租户字段(原因未知)]
+                if (("INSERT").equals(sqlCommandType.toString()) || "UPDATE".equals(sqlCommandType.toString())) {
+                    System.out.println("----->过滤插入与更新方法");
+                    return true;
+                }
                 // 过滤自定义查询此时无租户信息约束【 麻花藤 】出现
                 if ("com.xxm.mbp.dao.PersonMapper.selectList".equals(ms.getId())) {
                     return true;

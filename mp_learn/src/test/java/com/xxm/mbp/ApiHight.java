@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -21,6 +22,9 @@ public class ApiHight {
     private PersonMapper personMapper;
 
 
+    /**
+     * 逻辑删除下自动填充失效--查看官网解决方案
+     */
     @Test
     public void logicDel() {
 
@@ -137,6 +141,32 @@ public class ApiHight {
         Integer count = personMapper.selectCountTotal();
 
         System.out.println("------>"+count);
+    }
+
+    /**
+     * 选装件
+     * 1 批量新增数据，自选字段 insert
+     * 2 根据id逻辑删除数据，并自带字段填充功能
+     * 3 根据id固定更新某些字段
+     */
+    @Test
+    public void choiceSqlI() {
+        ArrayList<Person> list = new ArrayList<>();
+        Person person = new Person();
+        person.setUsername("插入某些字段注入器测试");
+        person.setPassword("111111");
+        person.setName("2222222");
+
+        Person person2 = new Person();
+        person2.setUsername("插入某些字段注入器测试222");
+        person2.setPassword("111122211");
+        person2.setName("222121212222");
+        list.add(person);
+        list.add(person2);
+
+        personMapper.insertBatchSomeColumn(list);
+
+
     }
 
 }

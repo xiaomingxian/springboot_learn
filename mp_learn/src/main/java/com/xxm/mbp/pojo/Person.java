@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.apache.ibatis.annotations.Insert;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -32,11 +33,17 @@ public class Person extends Model<Person> {
     private String password;
 
     private String name;
+    /**
+     * private * LocalDateTime  createTime;
+     * 低版本默认是java.util.Date
+     */
     @TableField(value = "create_time",fill = FieldFill.INSERT)
-    //private LocalDateTime createTime;
-    private Date createTime;//低版本默认是java.util.Date
+    private Date createTime;
+    /**
+     * 高版本用法
+     * private  * LocalDateTime  updateTime;
+     */
     @TableField(value = "update_time",fill = FieldFill.UPDATE)
-    //private LocalDateTime updateTime;
     private Date updateTime;
     /**
      * 逻辑删除
@@ -47,6 +54,7 @@ public class Person extends Model<Person> {
 
     @Version
     private int version;
+
 
 
     @TableField(value = "tenant_id")

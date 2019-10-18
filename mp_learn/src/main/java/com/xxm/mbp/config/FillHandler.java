@@ -17,8 +17,10 @@ public class FillHandler implements MetaObjectHandler {
         //System.out.println("-----------------");
         //setFieldValByName("","",metaObject);//通用
         boolean hasGetter = metaObject.hasGetter("createTime");
-        if (hasGetter)//如果有这个属性才进行赋值
+        if (hasGetter){
+            //如果有这个属性才进行赋值
             setInsertFieldValByName("createTime", LocalDateTime.now(), metaObject);
+        }
     }
 
     @Override
@@ -26,7 +28,8 @@ public class FillHandler implements MetaObjectHandler {
         //判断字段是否有值，如果有就不更新
         Object val = getFieldValByName("updateTime", metaObject);
         System.out.println("====>" + val);
-        if (val == null)
+        if (val == null){
             setUpdateFieldValByName("updateTime", LocalDateTime.now(), metaObject);
+        }
     }
 }
