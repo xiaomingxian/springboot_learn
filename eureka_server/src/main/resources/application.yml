@@ -53,10 +53,10 @@ management:
 #  client:
 #    service-url:
 #      #地址不管用???
-#      defaultZone: http://localhost:7777/eureka
+#      defaultZone: http://localhost:7777/learn/eureka
 #    #单机情况下false---不将自己注册到eureka中
 #    register-with-eureka: false
-#    #服务发现是否从eureka中发现服务
+#    #服务发现是否从eureka中发现服务##false表示自己就是注册中心，指责就是维护
 #    fetch-registry: false
 #  server:
 #    #是否开启自我保护[开发环境下关闭(网络稳定,如果打开会影响判断)--生产环境打开]-----当微服务没有心跳的时候不清除[自我保护状态-微服务不一定死掉(可能是网络延迟登原因)]
