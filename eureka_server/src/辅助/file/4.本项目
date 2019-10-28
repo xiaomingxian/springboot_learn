@@ -9,3 +9,6 @@ Eureka是C-S结构
     S:@EnableEurekaServer//来开启服务注册中心
     C:@EnableDiscoveryClient//作为客户端
 Eureka自我保护：
+    在自我保护中，eureka server会保护服务注册表中的信息，不会注销任何服务实例。当它收到的心跳数重新恢复到阈值以上时
+    该eureka server节点就会自动退出自我保护模式，它的设计哲学就是宁可保留错误的服务注册信息，也不盲目注销任何可能健康的服务实例
+

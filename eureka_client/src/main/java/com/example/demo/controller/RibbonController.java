@@ -4,6 +4,7 @@ package com.example.demo.controller;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,4 +36,16 @@ public class RibbonController {
         }
         return body;
     }
+
+
+    @GetMapping("getInstances")
+    public ResponseEntity<Map> getInstances() {
+        String service_name = "SERVER";//server中的spring.application.name
+
+        ResponseEntity<Map> forEntity = restTemplate.getForEntity("http://" + service_name + "/learn/instances", Map.class);
+
+        return forEntity;
+    }
+
+
 }

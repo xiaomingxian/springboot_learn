@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 //既作为客户端又是服务端-配置多个实例来相互注册和自我注册-实现高可用
 @EnableEurekaServer//来开启服务注册中心
-@EnableDiscoveryClient//作为客户端
+@EnableDiscoveryClient//作为客户端??//服务发现
 @SpringBootApplication
 @ComponentScan(basePackages = {"xxm.controller", "xxm.service"})
 //mybatis扫描使用

@@ -4,3 +4,19 @@ springCloud与dobbo 前者基于rest 后者基于rpc
 springCloud与springBoot
     cloud依赖与boot
     cloud是关注于全局的服务治理框架/boot专注于开发单个微服务个体
+
+
+CAP(一致性consistency 高可用availability 分区容错：partition Tolerance)
+    C/A/P:强一致性/高可用性/分布式容忍性
+    三进二L：但是集群状态 p是确定的(分区容错),只能AP/CP
+            CA: 传统Oracle数据库
+            AP: 大多数网站架构的选择
+            CP: Redis,Mongodb
+    分布式架构必须作出取舍
+
+eureka==>AP  zk==>CP
+zk:master节点因为网络故障与其他节点失去联系时(云部署时发生概率较大)，剩余节点就会重新进行leader选举，30～120s(事件过长，这段时间内集群不可用)
+ek:
+    1 自我保护机制(不会移除服务实例：因长期为收到心跳)
+    2 ek仍能接收新服务的注册和查询请求，但不会被同步到其他节点上(即保证当前节点依然可用) ？？？？
+    3 当网络稳定时，当前实例新的注册信息会被同步到其他节点中(数据可能有延迟)

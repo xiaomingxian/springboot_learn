@@ -153,16 +153,28 @@
         </dependencies>
     </dependencyManagement>
     <build>
+        <!--监控配置信息2 第一步是pom依赖 spring-boot-starter-actuator-->
         <finalName>${project.artifactId}</finalName>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
-            <!-- &lt;!&ndash; 资源文件拷贝插件 &ndash;&gt;
+            <!-- &lt;!&ndash; 资源文件拷贝插件 &ndash;&gt;  -->
+            <!--监控配置信息3-->
              <plugin>
                  <groupId>org.apache.maven.plugins</groupId>
                  <artifactId>maven-resources-plugin</artifactId>
                  <configuration>
                      <encoding>UTF-8</encoding>
+                     <delimiters>
+                         <!--解析带有$的配置文件-->
+                         <delimit>$</delimit>
+                     </delimiters>
                  </configuration>
-             </plugin>-->
+             </plugin>
             <!-- java编译插件 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -179,4 +191,11 @@
             </plugin>
         </plugins>
     </build>
+
+
+    <modules>
+        <module>../eureka_server</module>
+        <module>../eureka_client</module>
+    </modules>
+
 </project>
