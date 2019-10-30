@@ -13,7 +13,7 @@ eureka:
     service-url:
 #      hosts文件中配置的情况下这样使用
 #      defaultZone: http://eureka02:8888/learn/eureka,http://eureka01:7777/learn/eureka
-      defaultZone: http://localhost:8888/learn/eureka,http://localhost:7777/learn/eureka
+      defaultZone: http://localhost:8888/learn/eureka,http://localhost:7777/learn/eureka,http://localhost:6666/learn/eureka
       register-with-eureka: true
       fetch-registry: false
     server:
