@@ -29,7 +29,6 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public List select() {
-        return personMapper.select
-                ();
+        return personMapper.select();
     }
 }

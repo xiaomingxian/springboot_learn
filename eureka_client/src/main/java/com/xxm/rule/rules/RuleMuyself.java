@@ -56,7 +56,7 @@ public class RuleMuyself extends AbstractLoadBalancerRule {
 
 
             server = upList.get(index);
-            System.out.println( "--------------:" + server.getHostPort());
+            System.out.println( "--------------自定义负载均衡算法:" + server.getHostPort());
             count++;
             if (count % max == 0) index++;
             if (index == 3) index = 0;//因为示例有三个服务-为了防止索引越界
