@@ -1,12 +1,11 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.service.FeignControllerInterface;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -24,6 +23,15 @@ public class FeignController {
 
         Map map = feignControllerInterface.feignTest();
         return map;
+
+    }
+
+    @GetMapping("hysticTest")
+    @ApiOperation("hysticTest异常统一处理")
+    public String hysticTest(Integer id) {
+
+        String s = feignControllerInterface.hystixTest(id);
+        return s;
 
     }
 }

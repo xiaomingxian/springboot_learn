@@ -1,4 +1,4 @@
-package com.com.rule.rules;
+package com.xxm.rule.rules;
 
 import com.netflix.client.config.IClientConfig;
 import com.netflix.loadbalancer.AbstractLoadBalancerRule;
