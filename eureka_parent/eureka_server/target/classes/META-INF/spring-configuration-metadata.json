@@ -1,0 +1,9 @@
+{
+  "groups": [{
+    "name": "person",
+    "type": "xxm.controller.GetPropertiesController",
+    "sourceType": "xxm.controller.GetPropertiesController"
+  }],
+  "properties": [],
+  "hints": []
+}

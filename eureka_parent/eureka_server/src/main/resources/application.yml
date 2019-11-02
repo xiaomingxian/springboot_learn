@@ -1,0 +1,102 @@
+#:后面得有空格
+name: tom
+#对象
+person:
+  name: tom
+  age: 18
+#行内配置
+city: {name: tokyo,location: Japan}
+#配置数组,集合
+Ccity:
+  -beijing
+  -tianjin
+Ccity2: [beijing,tianjin]
+#集合中配置对象
+#报错？？？？？？？？？？？版本问题？？？
+#student:
+#  -name: tom
+#    age: 17
+#  -name: cc
+#    age: 16
+#student:[{name: tom,age: 18},{name: tom,age: 18}]
+
+#map配置
+map:
+  k1: v1
+  k2: v2
+#  ----------------------------------------------------------------------
+#端口
+server:
+  port: ${SERVER_PORT:7777}
+management:
+  port: ${MANAGEMENT_PORT:6000}
+  health:
+    mail:
+      enabled: false
+#http://localhost:60000/mappings查案mapping映射
+#http://localhost:60000/beans查看beans
+#/metrics	返回当前应用的各类重要度量指标
+#/metrics/{name}	查看具体指标
+#/health	获取应用各类健康指标信息ge
+#	/dump	暴露程序运行中的线程信息
+#/trace	返回基本的http跟踪信息
+#	/shutdonw	关闭应用
+
+#-------------------------    微服务       ------------------------------
+#------------  单机环境  --------------------
+##  设置服务名
+#spring:
+#  application:
+#    name: hello-service
+##  设置注册中心地址
+#eureka:
+#  client:
+#    service-url:
+#      #地址不管用???
+#      defaultZone: http://localhost:7777/learn/eureka
+#    #单机情况下false---不将自己注册到eureka中
+#    register-with-eureka: false
+#    #服务发现是否从eureka中发现服务##false表示自己就是注册中心，指责就是维护
+#    fetch-registry: false
+#  server:
+#    #是否开启自我保护[开发环境下关闭(网络稳定,如果打开会影响判断)--生产环境打开]-----当微服务没有心跳的时候不清除[自我保护状态-微服务不一定死掉(可能是网络延迟登原因)]
+#    enable-self-preservation: false
+#    #服务注册清理间隔---毫秒默认是:60*1000
+#    eviction-interval-timer-in-ms: 6000
+
+#------------------ 高可用环境  ----------------
+spring:
+  application:
+    name: server
+eureka:
+  instance:
+    #    hostname: ${EUREKA_DOMAIN:eureka01}
+    #    将自己的ip注入到eureka中
+    prefer-ip-address: true  #访问路径可以显示ip地址
+    ip-address: ${IP_ADDRESS:127.0.0.1}
+    instance-id: ${spring.application.name}:${server.port}
+  client:
+    service-url:
+      #      hosts文件中配置的情况下使用这个
+      #      defaultZone: ${SERVER_URL:http://eureka02:8888/eureka,http://eureka01:7777/eureka}
+      defaultZone: ${SERVER_URL:http://localhost:8888/learn/eureka,http://localhost:7777/learn/eureka,http://localhost:6666/learn/eureka}
+      register-with-eureka: ${registerSelf:true}
+      fetch-registry: true
+    server:
+      enable-self-preservation: false
+      eviction-interval-timer-in-ms: 6000
+  #--------------- es ----------------
+  data:
+    elasticsearch:
+      cluster-name: master
+      cluster-nodes: localhost:9205
+      local: false
+      repositories:
+        enable: true
+
+
+info:
+  app.name: server
+  company.name: www.xxm.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
