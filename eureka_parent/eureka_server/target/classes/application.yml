@@ -98,5 +98,5 @@ eureka:
 info:
   app.name: server
   company.name: www.xxm.com
-  build.artifactId: $project.artifactId$
-  build.version: $project.version$
+  build.artifactId: eureka_server
+  build.version: 1.0-SNAPSHOT

@@ -197,6 +197,7 @@
         <module>eureka_server</module>
         <module>eureka_client</module>
         <module>hystrix-dashboard</module>
+        <module>zuul</module>
     </modules>
 
 </project>

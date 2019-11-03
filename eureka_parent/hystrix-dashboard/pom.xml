@@ -49,11 +49,11 @@
             <scope>test</scope>
         </dependency>
 
-        <!--Hystrix-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-        </dependency>
+        <!--&lt;!&ndash;Hystrix&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.cloud</groupId>-->
+            <!--<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>-->
+        <!--</dependency>-->
 
         <!--HystrixDashboard-->
         <dependency>

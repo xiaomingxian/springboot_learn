@@ -1,0 +1,33 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: zuul-gateway
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8888/learn/eureka,http://localhost:7777/learn/eureka,http://localhost:6666/learn/eureka
+  instance:
+    instance-id: zuul-gateway.com
+    prefer-ip-address: true
+
+info:
+  app.name: zuul
+  company.name: www.xxm.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+
+
+#zuul:
+#  prefix: /api
+#  strip-prefix: false
+#  routes:
+#    microservice-provider-user: /user/**
+
+zuul:
+  routes:
+    microservice-provider-user:
+      path: /user/**
+      strip-prefix: false
