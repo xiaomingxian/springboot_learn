@@ -27,7 +27,11 @@ info:
 #    microservice-provider-user: /user/**
 
 zuul:
+  prefix: /xxm
+#  ignored-services: "*"  #禁用真实路径--原生与映射路径都不管用[原因未知]
   routes:
-    microservice-provider-user:
-      path: /user/**
-      strip-prefix: false
+    server1:
+      path: /zuul/** #映射的路径
+      serverId: SERVER #真实服务实例
+#无前缀：访问路径：http://localhost:9001/zuul/server/learn/getPropertiesTest
+#有前缀：访问路径：http://localhost:9001/zuul/前缀/server/learn/getPropertiesTest

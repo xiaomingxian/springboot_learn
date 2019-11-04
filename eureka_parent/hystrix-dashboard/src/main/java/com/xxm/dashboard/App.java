@@ -18,7 +18,9 @@ public class App {
     //初次会 ping 访问服务降级/熔断节点后刷新
 
     public static void main(String[] args) {
+
         SpringApplication.run(App.class, args);
+        System.out.println("------------------->>>>豪猪监控启动成功<<<<<-------------------");
     }
 
     @Bean

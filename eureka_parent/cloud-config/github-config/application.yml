@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active:
+    - dev
+
+---
+spring:
+  profiles:
+    application:
+      name: dev-enviroment
+
+---
+spring:
+  profiles:
+    application:
+      name: test-enviroment
