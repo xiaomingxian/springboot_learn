@@ -1,4 +1,6 @@
 尚硅谷文档：https://blog.csdn.net/kidom1412/article/details/99333622
+          源码：https://gitee.com/xiongrj/springcloud-base
+
 
 服务多实例：-Dspring.application.name=server2 -Dserver.port=8888 -Dmanagement.port=7000
 

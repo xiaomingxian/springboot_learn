@@ -11,5 +11,6 @@ public class ConfigApp {
 
     public static void main(String[] args) {
         SpringApplication.run(ConfigApp.class, args);
+        System.out.println("---------------->Config启动成功<-------------------");
     }
 }

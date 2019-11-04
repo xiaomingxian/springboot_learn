@@ -1,0 +1,4 @@
+#形式作用
+spring:
+  application:
+    name: config-client

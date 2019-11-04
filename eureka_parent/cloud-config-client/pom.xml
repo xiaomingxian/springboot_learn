@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cloud-config</artifactId>
+    <artifactId>cloud-config-client</artifactId>
 
     <dependencyManagement>
         <dependencies>
@@ -28,7 +28,7 @@
         <!-- springCloud Config -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-config-server</artifactId>
+            <artifactId>spring-cloud-config</artifactId>
         </dependency>
         <!-- 避免Config的Git插件报错：org/eclipse/jgit/api/TransportConfigCallback -->
         <dependency>
@@ -76,7 +76,6 @@
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
     </dependencies>
-
 
 
 </project>

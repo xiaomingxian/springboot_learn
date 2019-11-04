@@ -8,7 +8,12 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/hellxz/SpringCloudlearn
-          search-paths: config-repo
-          username: xiaomingxian  #github账号密码
-          password: XIan_934792834
+          uri: https://github.com/xiaomingxian/cloud_config_github.git  #git clone的地址
+
+#访问方式
+# http://localhost:9002/application-test.yml
+# http://localhost:9002/application-dev.yml
+# http://localhost:9002/master/application-dev.yml
+# http://localhost:9002/application/dev/master
+# http://localhost:9002/master/application-dev
+#

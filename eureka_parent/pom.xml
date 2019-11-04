@@ -200,6 +200,7 @@
         <module>hystrix-dashboard</module>
         <module>zuul</module>
         <module>cloud-config</module>
+        <module>cloud-config-client</module>
     </modules>
 
 </project>
