@@ -1,6 +1,6 @@
 #bootstrap.yml优先级最高[系统级]
-#server:
-#  port: 9003
+server:
+  port: 9003  #如果github中有端酒配置-会直接使用github中的数据
 #spring:
 #  cloud:
 #    config:
@@ -9,13 +9,15 @@
 #      label: master
 #      url: http://localhost:9002 #Config-Server 通过它获取github地址
 #
-server:
-  port: 9003
 
+
+#以下配置可以配置在 其他服务中使 配置可变
 spring:
   application:
-    name: application
+    name: client-config  #自定义
   cloud:
     config:
-      profile: dev
       uri: ${SPRING_CONFIG_URI:http://localhost:9002} #默认http://localhost:8888
+      profile: dev
+      name: application
+      label: master
