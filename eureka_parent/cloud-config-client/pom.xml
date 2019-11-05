@@ -25,23 +25,15 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- springCloud Config -->
+        <!-- SpringCloud Config客户端 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-config</artifactId>
+            <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
-        <!-- 避免Config的Git插件报错：org/eclipse/jgit/api/TransportConfigCallback -->
-        <dependency>
-            <groupId>org.eclipse.jgit</groupId>
-            <artifactId>org.eclipse.jgit</artifactId>
-            <version>4.10.0.201712302008-r</version>
-        </dependency>
-        <!-- 图形化监控 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <!-- 熔断 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-hystrix</artifactId>
@@ -66,7 +58,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
-        <!-- 热部署插件 -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>springloaded</artifactId>
@@ -76,6 +67,5 @@
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
     </dependencies>
-
 
 </project>
