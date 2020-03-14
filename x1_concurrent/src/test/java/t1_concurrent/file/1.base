@@ -1,0 +1,28 @@
+线程创建(4种)
+    1 实现 Runnable
+    2 继承Thread (实现了 Runnable) 内部调用的也是run方法(子类的run方法[继承了Thread的类])
+    3 Callable/Future 带返回值的线程
+    4 ThreadPool
+
+    线程池实际多用
+
+线程生命周期(6个)(1.线程生命周期.jpg)
+    主线：New Running(cpu调度) Terminate
+    阻塞：Waiting(wait()/join()也是wait的一种) Time_Waiting(sleep()) BLOCK(锁阻塞)
+
+线程启动为什么是start()
+    内部调用的start0()是个native方法
+    1 下载hotSpot/openjdk源码
+
+线程中断
+    stop() 被废弃(相当于kill -9 不管在做什么都结束)  thread.interrupt();时修改标志让用户自己判断来结束
+    thread.interrupt();//通过修改Thread的interrupt属性(JVM层面OSThread类中的 volatile jint_interrupted;) 来达到效果
+    内部调用的interrupt0()是个native方法
+线程复位(回到初始状态)
+    1 Thread.interrupted();
+    2 异常 遇到异常会中断,在中断之前会复位,然后抛出异常
+为什么阻塞方法抛出异常 时一定会复位
+    抛异常：如果执行的方法被中断，会尝试终止正在做的事情而抛出一个异常，
+        当前的线程并没有结束(还在运行,只是给了个异常信号[给信号的同时会把线程复位])
+    阻塞方法可能等不到外部的触发而导致无法中断，允许一个线程来请求自己中断正在做的事情(给个信号)
+
