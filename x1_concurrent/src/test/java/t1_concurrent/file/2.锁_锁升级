@@ -42,3 +42,5 @@
 wait()/sleep()
     wait()会释放锁,并释放cpu资源
     sleep()不会释放锁资源,会释放cpu资源,只是使得线程处于waiting状态
+
+
