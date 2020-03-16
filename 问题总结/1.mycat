@@ -1,0 +1,2 @@
+mycat不支持二进制的某些写入方式 setBlob()/setBinaryStream()   setBytes()可以
+    https://blog.csdn.net/luoqiang616477607/article/details/81772431
