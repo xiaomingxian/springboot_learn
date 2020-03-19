@@ -1,7 +1,24 @@
 java.util.concurrent  //并发工具包
 
 ================================ Lock接口 ============================
-唯一的实现：ReentrantLock rtl
-    rtl.lock();//调用的是Sync.lock(); Sync是它的内部类 是AQS的实现
 重入锁:解决死锁,不会重新获得锁,会增加锁的冲入次数,释放的时候会减少冲入次数
     (同一把锁嵌套的时候,加入没有重入概念,在进入第二把锁的时候会等待第一把锁释放,就会出现死锁现象,释放的时候逐级较少冲入次数直到完全释放)
+
+唯一的实现：ReentrantLock rtl
+    rtl.lock();
+        调用的是 Sync.lock()[Sync是它的内部类 是AQS的实现];
+        调用AQS的实现的 tryAcquire() 来判断是否已经获得锁[CAS判断](state状态值)?加入同步队列:修改状态,使自己独占锁 state=1,exclusiveOwnerThread=自己的线程
+        #state=0无锁,>=1有锁(重入时加1)
+        eg:
+            ThreadA:获得锁
+            ThreadB:
+                尝试获得锁：
+                    进来会走另一个判断分支(非公平方法)  先查看锁状态[可能A很快的释放,也可能重入获得(在A释放的前提下)]
+                    =0:先尝试获得锁(加入A释放了,B就获得[非公平的一种体现]);
+                    >0:增加重入次数
+                没有获得锁(加入阻塞队列):
+    释放锁:rtl.unlock()  Sync.release()
+        修改锁状态为 state-release(兼容重入锁的释放),锁状态等于0时(说明完全释放)exclusiveOwnerThread=null
+    #TODO 待验证    唤醒其他线程(找到head(因为是双向结构所以无所谓前后)节点如果它不为空,并且是SINGLE状态(-1)(在线程获取锁的时候会将head节点状态设置为-1,释放的时候唤醒的还是head节点) 就调用底层api唤醒)
+    #TODO 待验证    head节点得到锁:修改状态,使自己独占锁 state=1,exclusiveOwnerThread=自己的线程 #如此往复
+
