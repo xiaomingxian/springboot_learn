@@ -1,6 +1,9 @@
 java.util.concurrent  //并发工具包
 
 ================================ Lock接口 ============================
+AQS:https://www.jianshu.com/p/7b0e11a1e605
+    CAS+锁标志+FIFO队列(新增的阻塞节点都会追加在后面)
+AQS执行流程[必看]:https://www.cnblogs.com/wuchanming/p/10274907.html
 重入锁:解决死锁,不会重新获得锁,会增加锁的冲入次数,释放的时候会减少冲入次数
     (同一把锁嵌套的时候,加入没有重入概念,在进入第二把锁的时候会等待第一把锁释放,就会出现死锁现象,释放的时候逐级较少冲入次数直到完全释放)
 
@@ -19,6 +22,7 @@ java.util.concurrent  //并发工具包
                 没有获得锁(加入阻塞队列):
     释放锁:rtl.unlock()  Sync.release()
         修改锁状态为 state-release(兼容重入锁的释放),锁状态等于0时(说明完全释放)exclusiveOwnerThread=null
-    #TODO 待验证    唤醒其他线程(找到head(因为是双向结构所以无所谓前后)节点如果它不为空,并且是SINGLE状态(-1)(在线程获取锁的时候会将head节点状态设置为-1,释放的时候唤醒的还是head节点) 就调用底层api唤醒)
-    #TODO 待验证    head节点得到锁:修改状态,使自己独占锁 state=1,exclusiveOwnerThread=自己的线程 #如此往复
 
+公平锁/非公平锁
+    公平锁:先判断阻塞队列中有没有节点,没有才cas替换去获取锁
+    非公平:上来直接cas替换去获得锁[获取到就直接用]
