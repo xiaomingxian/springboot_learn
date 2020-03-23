@@ -1,0 +1,12 @@
+condition[线程通信工具(类似与wait/notify)]
+    condition.await()/signal/signalAll()
+    await()
+        #AQS的await()
+        #释放锁时,fullyRelease()一个锁全部释放(针对重入锁一层一层释放的情况-通过获取重入次数直接减冲入次数来完全释放)
+        condition的阻塞队列是单向链表
+        阻塞当前节点的线程,唤醒next节点的线程
+    signal()
+
+    #总体流程:
+        第一个线程进来后await()并释放锁后进入condition的阻塞队列
+        第二个线程进来后获得锁signal()后释放锁并唤醒condition队列中的等待线程,让其进入aqs的同步队列去竞争锁
