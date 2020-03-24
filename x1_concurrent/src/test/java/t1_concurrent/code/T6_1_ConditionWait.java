@@ -3,13 +3,13 @@ package t1_concurrent.code;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
-public class T61_ConditionWait implements Runnable {
+public class T6_1_ConditionWait implements Runnable {
 
     private Lock lock;
     private Condition condition;
 
 
-    public T61_ConditionWait(Lock lock, Condition condition) {
+    public T6_1_ConditionWait(Lock lock, Condition condition) {
         this.lock = lock;
         this.condition = condition;
     }

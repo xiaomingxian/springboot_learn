@@ -22,6 +22,7 @@ AQS执行流程[必看]:https://www.cnblogs.com/wuchanming/p/10274907.html
                 没有获得锁(加入阻塞队列):
     释放锁:rtl.unlock()  Sync.release()
         修改锁状态为 state-release(兼容重入锁的释放),锁状态等于0时(说明完全释放)exclusiveOwnerThread=null
+        #会触发阻塞队列中的下一节点去竞争锁
 
 公平锁/非公平锁
     公平锁:先判断阻塞队列中有没有节点,没有才cas替换去获取锁

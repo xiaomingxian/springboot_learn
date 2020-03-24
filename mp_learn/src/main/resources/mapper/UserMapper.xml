@@ -14,4 +14,9 @@
         uid, username, password
     </sql>
 
+    <!--去重测试 -->
+    <insert id="iTest">
+
+    </insert>
+
 </mapper>

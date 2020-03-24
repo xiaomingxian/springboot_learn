@@ -28,5 +28,7 @@ public interface UserMapper extends BaseMapper<User> {//AR模式
     List<User> selectPageMy(Page<User> page, @Param(Constants.WRAPPER) Wrapper<User> user);
 
 
+    void  iTest(User);
+
 
 }

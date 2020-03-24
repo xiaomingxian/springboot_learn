@@ -10,8 +10,8 @@ public class T6_ConditionTest {
         ReentrantLock lock = new ReentrantLock();
         Condition condition = lock.newCondition();
 
-        T61_ConditionWait t61_conditionWait = new T61_ConditionWait(lock, condition);
-        T62_ConditionNotify t62_conditionNotify = new T62_ConditionNotify(lock, condition);
+        T6_1_ConditionWait t61_conditionWait = new T6_1_ConditionWait(lock, condition);
+        T6_2_ConditionNotify t62_conditionNotify = new T6_2_ConditionNotify(lock, condition);
 
         new Thread(t61_conditionWait).start();
 
