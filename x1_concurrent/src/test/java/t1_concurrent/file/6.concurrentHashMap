@@ -1,4 +1,6 @@
 #https://www.cnblogs.com/zerotomax/p/8687425.html
+#https://www.jianshu.com/p/77fda250bddf #必看
+#https://www.cnblogs.com/technologykai/articles/10966606.html  #高低位
 流程:
     1 初始化Node    #Node<K,V>[] table  #有线程抢占到初始化权限 为其赋值-1(CAS替换)
     2 addCount(); #Node[]长度增加,扩容判断
@@ -6,8 +8,14 @@
             #实际采用:baseCount(并发量不大的情况下基于CAS增加,只会尝试一次)+countCell元素遍历(累加)
             #countCell根据线程生成随机数(ThreadLocalRandom线程安全的随机数 & countCtl的长度与运算 下标一定在countCtl内)存线程对应的增加个数 分段计算的方式(分流,支持并发增,不存在锁的等待) #空间换时间
     3 size()获取:baseCount+countCell元素遍历(累加)
-#sizeCtl   =-1:表示已经有线程抢占到了初始化的权限;大于0表示扩容大小(当前Node数组的大小*0.75)
+#sizeCtl
+    -1:表示已经有线程抢占到了初始化的权限;
+    大于0表示扩容大小(当前Node数组的大小*0.75)
+    -n(非-1):代表有n-1个线程正在扩容
 #扩容/转树规则:长度小于64扩容,长度大于64且Node链表长度大于8转树
+    可以多个线程并行扩容
+    采用高低链来解决多次hash计算的问题,提升了效率 #扩容时的数据迁移
+    resizeStamp设计,高低位的设计来实现唯一性以及多个线程的协助扩容记录
 #下标计算:n-1&hash
 #初始化countCell
 #题:数组被volatile修饰 可见性不包含数组元素 只包含对数组元素的引用
