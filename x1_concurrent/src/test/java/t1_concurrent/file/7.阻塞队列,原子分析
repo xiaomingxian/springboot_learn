@@ -1,0 +1,26 @@
+队列
+    1 ArrayBlockingQueue
+    2 LinkedBlockingQueue
+    3 DelayQueue
+    4 SynchrousQueue
+    5 ...
+操作方法
+    插入元素
+        add:添加元素用add方法时，如果超过定义的长度则会抛出异常 java.lang.IllegalStateException: Queue full
+            内部也是调用offer跟据返回值来确定成功失败
+        offer():取出元素时用remove方法，如果删除的元素超出定义长度则抛出异常 java.util.NoSuchElementException
+            重载带时间参数 offer(时长,时间单位) 在指定时间内阻塞,超出等待时间返回false
+            #使用 ReentractLock 保证线程安全
+        put:阻塞直到可以写入
+    删除/获取元素
+        remove/poll()/take
+            remove删除
+            poll()取元素 为空返回null
+            take 为空阻塞  #通过 Condition 实现  #take的时候阻塞(count==0时),放入元素的时候唤醒
+
+
+Atomic(基于CAS实现)
+
+================== 场景
+分布式队列 ActiveMq,Kafka
+1 顺序请求

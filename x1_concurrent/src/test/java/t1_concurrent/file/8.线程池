@@ -1,0 +1,40 @@
+工具类: Executors  #5种类型
+    Executors.newFixedThreadPool(3);//固定线程数的线程池
+    Executors.newCachedThreadPool();//可以无限创建,线程在不使用60s后会被回收 #核心线程数是0,最大线程数是Integer.Max
+    Executors.newSingleThreadExecutor();//只有一个核心线程的线程池
+    Executors.newScheduledThreadPool(...);//定时任务
+    Executors.newWorkStealingPool();//fork/join线程池
+
+    ========>本质上使用的都是以下方法重载
+    new ThreadPoolExecutor(...)
+
+    7大参数
+        int corePoolSize //核心线程数
+        int maximumPoolSize //最大线程数
+        long keepAliveTime //超时时间
+        TimeUnit unit //超时时间单位
+        BlockingQueue<Runnable> workQueue //阻塞队列
+        ThreadFactory threadFactory //线程的工厂
+        RejectedExecutionHandler handler //拒绝策略
+
+总体流程:pic/3.总体流程
+    work工作线程的封装 执行方法runWorker(){实际执行任务的是自定义的实现了Runnable或者其他的run()方法}执行方法是一个循环,
+        循环的条件是取获取task(从阻塞队列中获取)或者当前有task,循环执行完毕后 worker会从workers中移除,线程会被销毁/为啥不是回收再利用(run方法执行完毕就被jvm回收了？)
+    设置核心线程允许被回收 threadPoolExecutor.allowCoreThreadTimeOut(true);
+
+    1 不建议使用Executors创建线程池 部分类型的线程池允许创建的最大线程数量为Integer.Max 可能会创建大量线程导致oom  https://blog.csdn.net/u010321349/article/details/83927012
+    2 线程池的大小设置:https://www.cnblogs.com/cjsblog/p/9068886.html
+        如果是CPU密集型应用，则线程池大小设置为N+1 N为cpu核数
+        如果是IO密集型应用，则线程池大小设置为2N+1
+        通过api可以设置最大线程数/核心线程数量...
+    线程关闭
+        .shutdownNow();//强制关闭 类似与kill -9
+        .shutdown();//等到任务执行完毕才关闭
+    submit()与execute()的区别
+        submit支持带返回值类型的,支持runnable与callable,不会抛出异常可以通过future.get来获取
+        execute没有返回值,只能支持runnable类型,会抛出异常
+    线程池实现了AQS(为了使用队列)但是不支持重入
+        不能(不允许)支持重入,一个线程执行一个任务
+
+
+
