@@ -1,0 +1,4 @@
+http请求流程
+    1 dns(domain name server)转换:域名转ip
+    2 七层...
+    url(统一资源定位符)
