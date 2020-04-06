@@ -1,0 +1,5 @@
+序列化id不匹配解析的时候也会报错 不定义的时候会自动生成一个
+transient 不允许被序列化 加在属性上解析出来的结果是null # private void writeObject/readObject 又可以使transient修饰的属性被序列化
+    transient+read/writeObject 组合可以在某些场景进行优化 eg:ArrayList中 在方法内把元素拆开进行序列化
+    write/readObject 是通过反射调用 方法名字是固定的
+

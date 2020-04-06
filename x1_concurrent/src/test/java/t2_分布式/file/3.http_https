@@ -2,3 +2,21 @@ http请求流程
     1 dns(domain name server)转换:域名转ip
     2 七层...
     url(统一资源定位符)
+
+https:在http的基础上多加了一层 ssl/tls 负责加解密  #数据加密:对称/非对称加密/摘要算法(md5等)
+    http:        https:
+    http            http
+    tcp             ssl/tls
+    ip              tcp
+                    ip
+uri/url/urn:https://blog.csdn.net/u011848397/article/details/88927167
+    url:一个人的绝对位置
+    urn:身份号(唯一标识)
+====================== other
+长连接:https://www.cnblogs.com/cswuyg/p/3653263.html
+http是无状态请求:不会对请求状态做保存 eg:客户端发第二次请求的时候,服务端不知道它已经发过一次请求了
+公钥私钥:
+    clientA --> midServer(中间人) -->Server
+    私钥  -->  请求公钥            -->   转发请求
+         <--   只能返回获得的公钥不能篡改(但是可以重新生成一对密钥,来达到自己的目的)  <--   返回获得的公钥 <--  #关键点:如何保证公钥来自真正的客户端
+    获取第三方机构的证书(CA机构)保存在本地(浏览器[可信任证书],操作系统)  #服务端配置443监听,配置ca证书(可以使用openssl来制作自己的ca证书)
