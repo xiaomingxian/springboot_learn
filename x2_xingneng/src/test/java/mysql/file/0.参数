@@ -1,0 +1,33 @@
+global/session 级别
+连接数量
+查询缓存 query_cache 8.0缓存模块已经取消
+优化器模块:会生成多条执行计划Execution Plan cost 选择开销最小的一条执行  show status like 'Last_query_cost'
+优化器追踪:optimizer_trace
+执行计划:explain sql语句
+查看mysql服务的各种状态: show status ...   #eg:show status like '%innodb_buffer_pool%'
+系统参数:show variables like '%innodb_buffer_pool%'
+
+
+库中表的存储引擎:show table STATUS FROM aioa_test;
+数据存储的地方: show VARIABLES like 'datadir'
+
+========================================================
+sql执行过程:./pic/0.sql执行过程.jpg
+========================================================
+存储引擎:
+    5.5之前:myisam:
+        表级别的锁
+        不支持事务/外键
+        读为主
+        存储了行数(count快)
+        #场景1
+            大批量数据 写入100w 修改引擎为 myisam 存储过程写数据，修改引擎为innodb  造测试数据可以这么做
+    5.5之后:innodb:
+        支持事务/外键
+        支持表/行锁
+        支持读写并发
+    memory:把数据放在内存里,磁盘中只存储表结构,数据存在内存里  #读写速度快,重启后会丢数据
+    csv:不支持索引#导入导出可以用
+    ...
+
+
