@@ -1,0 +1,39 @@
+支持事务的存储引擎:innodb NDB
+事务的四大特性:ACID
+    原子性(Atomicity)
+    一致性(Consistent)
+    隔离性(Isolation)
+    持久性(Durable)  #崩溃恢复 redolog / douuble write(数据页损坏的情况下)
+
+
+开启事务的时机:默认是有事务的 show global/session variables like 'autocommit'
+    事务持有的锁会在 commit/rollback/连接断开时 会自动释放
+    手动:
+        begin; sql; commit/rollback
+        start transaction ;sql ; commit/rollback
+
+
+
+======================== 隔离级别导致的问题
+脏读:读到另一事务未提交的数据
+虚读:读到另一事务更新的数据(更新删除)
+幻读:
+    事务内查到另一事务的 新增数据
+    select 某记录是否存在，不存在，准备插入此记录，但执行 insert 时发现此记录已存在，无法插入，此时就发生了幻读
+----------   隔离界别
+Read Uncommitted：未提交读
+Read Committed :  已提交读（oracle默认）   解决脏读
+Repeatable Read： 可重复读（mysql默认）   解决虚读        #innodb同事解决了幻读
+Serializable：    序列化                    解决幻读
+
+
+================================ 问题
+innodb如何解决幻读(以下两个方案协同使用)
+    思路1:加锁 读的时候不允许其他事务修改
+    思路2:数据快照(基于数据请求时间) #生成一个数据请求时间点的一致性数据快照,并用这个快照提供一定级别(语句或事务级)的读取一致性(MVCC) multi version concurrency control
+        可以查询到在本事务开始之气的数据,即使数据增删改 (查不出事务id大于自己的,删除版本大于自己/或者未删除的)
+        如何实现读一致性:两个隐藏字段
+            DB_TRX_ID(事务id[创建/更新版本]):自增
+            DB_ROLL_PTR(回滚指针[删除版本]):当前事务id
+
+更新数据:删除原来的数据 删除版本记为当前事务id (undoLog);新增一条数据 创建版本为当前事务id,删除版本为空
