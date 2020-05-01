@@ -1,0 +1,12 @@
+
+1.减少连接池的大小:(cpu*2)+1  #减少cpu上下文切换
+    HikariCP:10
+    Druid:8
+2.第三方缓存 #eg:redis
+3.集群 #多种方案   数据同步:中继日志
+    如何减少中从复制的延迟:mysql采取异步复制
+    数据一致性:
+        #异步复制不可取(无法确定是否成功)/全同步不可取(效率过低)
+        半同步(只要有一个从节点写到中继日志)[使用插件:semisync_master/slave mysql已有]
+        GTID(全局主键)[从库并行的执行sql]:https://www.cnblogs.com/caicz/p/10855605.html  #默认关闭
+

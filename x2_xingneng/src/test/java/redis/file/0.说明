@@ -1,0 +1,131 @@
+redis:remote dictionary server
+
+no sql :
+    非结构行数据:文本,音频,视频...
+    表结之间无关系,扩展性强
+    无事务:BASE 最终一致性
+    海量数据,高并发
+    分布式
+
+非关系数据库
+    kv:redis memacache
+    文档存储:mogodb
+    列存储:hbase
+    图存储:graph
+    对象存储
+    xml
+    ...
+
+new sql(关系+非关系)
+
+
+
+
+
+
+***************************** 命令  https://www.cnblogs.com/chiangchou/p/redis-2.html
+select 0 #选库
+flushdb  #清空当前库
+flushall
+
+exists key  1/0
+del key
+
+type key  #类型 string,hash...
+
+
+mset k1 v1 k2 v2 k3 v3 (k,v....)  #批量设置:k相同v会覆盖
+mget k1 k2 k3
+
+setnx key value #不存在才设置 失败0/成功1   #可以实现分布式锁 设置加锁/del释放锁(可能会删除失败-设置过期时间自动释放)
+expire key time #过期时间是对key设置的 不能对hash的小key进行精细控制
+#多参数: set lock v1 ex 10 nx #设置参数过期时间为10s 不存在就设置
+递增递减(原子性):
+    set inttype 1  #增:incr inttype #减:decr inttype
+    set floatkey 1.1 #incrbyfloat floatkey 2.2
+append key value
+
+hash批量:
+    hmset h1 k v k1 v1 k2 v2 ...
+    hmget h1 k k1 k2 ...
+    hkeys h1
+    hvals h1
+    hgetall h1
+
+
+*************************** 数据类型(8种-常用5种)
+1.string：最基本的数据类型，二进制安全的字符串，最大512M。  #为什么二进制安全:
+2.list：按照添加顺序保持顺序的字符串列表。
+3.set：无序的字符串集合，不存在重复的元素。
+4.sorted set：已排序的字符串集合。
+5.hash：key-value对的一种集合。
+    6.bitmap：更细化的一种操作，以bit为单位。
+    7.hyperloglog：基于概率的数据结构。
+    8.Geo:地理位置信息储存起来， 并对这些信息进行操作
+
+
+-------------数据存储:  https://blog.csdn.net/weixin_33898876/article/details/93374970
+hash表结构:./pic/0.redis存储结构.jpg
+    ziplist(记录了前后节点的长度(比记录地址值更节省内存)),
+    ht(hashtable)
+        dict:数组+链表
+            dict->dictht数组(长度为2)->dictEntry数组
+
+        dictEntry{
+            key
+            redisObject
+            ...
+        }
+        redisObject{
+            unsigned type:4;//类型
+            unsigned encoding:4;//编码
+            unsigned lru:LRU_BITS;//回收算法
+
+            int refcount;//引用计数,没有引用就可以用来回收
+            void *ptr;//真正的数据结构
+        }
+
+list:(链表下标排序)
+    quicklist(3.2之后)(双向链表)
+        每个节点都是一个ziplist(因为内存空间珍贵)
+        typedef struct quicklist{
+            quicklistNode *head;        #头节点指针
+            quicklistNode *tail;        #尾节点指针
+            unsigned long count;
+            unsigned long len;
+            int fill: 16;               #正数:一个ziplist可以存的dictEntry  #负数:单个ziplist容量的大小
+            unsigned int compress : 16; #节点上的ziplist是否进行压缩
+        }
+    ziplist/linkedlist(3.2之前)
+
+
+set:
+    整形intset
+    元素不是整形:hashtable
+    长度超出512:hashtable 元素时key value是空值
+    场景:交集,并集,差集  --->类型过滤
+
+zset:score排序(分数相同再根据hash码排)
+    zadd myzset 10 java 20 php 30 ruby ... (集合 分数 元素)
+    排序(正反),统计数量,增加分数,根据分值范围查询,获取元素分值...
+
+    底层实现：
+        1.ziplist:count<128 or 所有元素大小<64 byte
+        2.skiplist+dict  #层级(randomLevel 随机生成)
+            跳表(二分思想,查找时从最高层往下):https://blog.csdn.net/weixin_41462047/article/details/81253106
+         场景:排行榜(zset反向排行)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
