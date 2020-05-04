@@ -1,0 +1,48 @@
+发布订阅模式:
+    subscribe c1 c2 c3 #订阅频道
+    publish c1 message
+    通配符:
+        psubscribe *xxx
+
+
+事务:
+    单个命令是原子性的
+    多个:
+        discard #取消事务
+        exec    #执行事务
+        multi   #开启事务  事务不能嵌套
+        unwatch
+        watch   #CAS乐观锁  事务1:watch key 监听key  事务2:key进行操作后   事务1提交后也不会生效
+
+    #发生异常的情况
+        exec之前:命令出错(编译出错) 事务会取消
+        exec之后:(运行出错)成功的命令还是会生效     #Lua脚本解决
+    事务回滚如何解决：Lua脚本解决
+
+
+内存回收:
+    定时过期:
+    惰性过期:(redis种使用)
+        get/set时判断 对内存不太友好(不能及时的清理)/对cpu资源友好(后台线程不用频繁运行)
+        内存到上限时会触发 activeExpireCycle() 进行内存清理
+    定期过期:以上2种方法结合  (redis种使用)
+
+假如都没有设置过期:
+    淘汰策略:
+        volatile-lru: 最近最少使用(有过期时间)【次数】
+            随机采样(配置文件采样数量)来取热度(redis Object种存储了lru [最近的操作时间(相近(通过定时任务来更新这个字段有一定延迟))])最低的数据
+        allkeys-lru:
+        volatile-lfu:最近最频繁使用(有过期时间)【频率】 (redis Object种存储了lru 访问时间和访问频率)
+        allkeys-lfu:
+        volatile-random:
+        allkeys-random:
+        volatile-ttl:
+        noeviction:不做内存淘汰(满了就在写的时候报错)
+持久化:
+    RDB(Redis DataBase)[默认开启]:
+        快照:dump.rdb    save x(秒) y(次数)  #x秒内y次修改就会触发
+        手动触发:save #这条命令会阻塞 服务器
+                bgsave #异步触发(子进程fork)
+    AOF(Append Only File)[默认关闭]:
+        bgrewrite:异步rewrite(使数据指令最小[eg:重复的指令只使用一条])
+        持久化的时候又有新的指令执行:执行指令+AOF重写缓存-->同步到AOF文件
