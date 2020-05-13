@@ -1,0 +1,31 @@
+============================ 分布式 事务
+    CAP(一致性,可用性,分区容错性)  #一般只能同时做到2个 eg:AP
+    BASE(BASE 是 Basically Available(基本可用)、Soft state(软状态[允许数据延迟])和 Eventually consistent (最终一致性)):
+        https://baijiahao.baidu.com/s?id=1651176652760407681&wfr=spider&for=pc
+
+    1.全局事务 XA(两阶段提交[有一个协调者]) Atomikos
+    2.基于可靠消息服务的分布式事务(中间件)
+    3.柔性事务 tcc 类似于xa eg:微服务 不同服务之间 给个中间状态(eg:修改中)
+        #tcc框架:https://blog.csdn.net/yongyou890410/article/details/82719062
+
+
+
+========================== 排序 分页问题
+    拿到不同的库的数据 再做计算
+
+========================== 全局主键问题
+    1.序列表 自增主键 for update +1  #并发性差
+    2.UUID #16进制数字
+    3.雪花算法 生成主键 自增不重复
+
+    mycat:
+
+========================== 多数据源切换
+DAO -- ORM -- JDBC -- Proxy --Server
+
+AbstractRoutingDataSource(Spring)
+
+MyBatis Plugin query update
+
+驱动层 Sharding-JDBC
+
