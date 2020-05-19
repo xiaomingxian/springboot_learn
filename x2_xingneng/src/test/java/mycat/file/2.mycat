@@ -11,3 +11,16 @@
     server.xml 服务器,用户,权限...
     schema.xml 库表,节点...
     rule.xml   规则算法[分片...]
+        分片:
+            范围分片
+            er分片:取模
+
+
+分布式id:
+    文件:记录当前id(当前用了就更新[递增],最小,最大)#全局的 也可以根据表制定不同方式的id
+        select next value from mycatseq_customer/mycatseq_company
+    数据库:设置存储过程与记录表
+    本地时间戳:类似雪花算法
+    zk:
+
+mycat数据监控 慢sql分析.. #mycat help查看更多
