@@ -29,3 +29,22 @@ MyBatis Plugin query update
 
 驱动层 Sharding-JDBC
 
+=========================== dataNode挂了怎么处理
+writeHost可以配置多个
+switchType:主从切换   1自动切换
+
+=========================== 自动找到路由所在节点
+explain sql #mycat中时帮助分析路由所在的节点
+
+存储函数:mycat不支持,得找到节点执行
+    /*!mycat:sql=XXX*/create procedure test_proc() begin end; #创建路由语句
+建表:
+    /*!mycat:sql=XXX*/创建表语句; #创建表语句
+========================== 关联查询时 数据在不同节点上怎么处理(数据查不到)
+/*!mycat:catlet=io.mycat.catlets.ShareJoin*/
+关联查询语句
+
+========================== 主从复制 延迟问题
+/*balance*/ select ....  #balance注释 强制走写节点
+/*!mycat:db_type=master*/select ...  #或者指定节点
+/*#mycat:db_type=master*/select ...  #或者指定节点 !/#

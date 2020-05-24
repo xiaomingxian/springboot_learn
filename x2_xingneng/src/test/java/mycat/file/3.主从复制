@@ -1,0 +1,19 @@
+作用:
+    数据备份
+    读写分离
+    高可用ha
+    扩展
+
+
+主从赋值基础:binlog  手动开启:binlog位置 #通过同步binlog日志到中继日志来同步数据
+    形式:
+        STATEMENT 每一个操作的sql(类似于AOF)
+        ROW       修改后的数据5.7后默认(类似于RDB)
+        MIXED     以上两种的结合
+
+配置:
+    server-id:2 #节点id
+    log-bin=mysql-bin   #binlog
+    relay-log=mysql-relay-bin #中继日志
+    read-only=1 #只读
+    log-slave-updates=1
