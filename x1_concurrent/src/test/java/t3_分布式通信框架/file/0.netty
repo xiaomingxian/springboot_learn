@@ -1,0 +1,7 @@
+netty:封装IO操作的框架(IO+多线程)
+
+1.netty用途:
+    spring5底层,springboot内部的web容器,
+    zk,dubbo(分布式服务框架)的多协议支持(RPC)用的也是netty
+
+2.netty解决了什么问题
