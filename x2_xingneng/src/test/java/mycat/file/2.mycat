@@ -24,3 +24,8 @@
     zk:
 
 mycat数据监控 慢sql分析.. #mycat help查看更多
+
+
+
+=====================分布式事务
+D:\xxm\learn\java_workspace\boot_project\x2_xingneng\src\test\java\mycat\file\5.sharding-jdbc

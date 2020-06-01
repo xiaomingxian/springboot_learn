@@ -1,0 +1,29 @@
+#Sharding-JDBC 客户端方式 区别于Mycat(服务端形式)
+使用:引入依赖，规则配置(配置文件等),创建DataSource
+*********************************************************************
+1.sharding-jdbc的使用方式,自定义分片算法的配置
+
+2.分布式，全局id等问题的解决方案
+
+3.sharding-jdbc的工作流程和实现原理
+
+4.基于客户端的分库分表方案和基于代理的分库分表的差别
+
+
+==============数据源的选择问题的解决方案层次
+DAO层  #注解
+ORM层  #插件
+JDBC   #Sharding-JDBC
+代理层  #Mycat,Sharding Proxy
+
+==============表关系
+全局表:冗余的思想  多个节点上存储相同的数据
+绑定表(类似于mycat的e表):数据和明细  数据和明细要落在同一个分片上
+
+=============分片策略
+1.行表达式分片策略:inlineShardingStrategy
+2.标准分片策略:StandardShardingStrategy
+3.复合分片策略:ComplexShardingStrategy
+4.Hint分片策略:HintShardingStrategy
+5.不分片策略:NoneShardingStrategy
+
