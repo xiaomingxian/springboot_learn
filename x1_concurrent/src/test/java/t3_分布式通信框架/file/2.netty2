@@ -1,0 +1,14 @@
+1.NIO的核心组件 Buffer,Selector,Channel
+    *Buffer(顶层接口)【数组】:capacity(大小),position(开始位置),limit(数据长度)
+         直接缓冲区 0拷贝(不经过jvm内存,直接操作机器内存) 提高io速度  #jvm中存储的只是引用 影响管理效率
+    *Selector 调度器，主线程去分配各种work线程去工作
+    *Channel 持有客户端引用 FD(文件描述符)
+
+
+2.多路复用
+
+3.Netty支持的功能与特性
+
+todo 3.4.4
+todo 3.4.5
+todo 3.4.6
