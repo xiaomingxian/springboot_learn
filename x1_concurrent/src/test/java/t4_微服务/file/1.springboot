@@ -1,0 +1,16 @@
+1.AutoConfiguration 自动装配
+2.Stater
+3.Actuator
+4.SpringBoot CLI   #命令行启动 独立的程序
+
+
+
+@SpringBootApplication
+    @EnableAutoConfiguration
+    @ComponentScan
+    @Configuration
+        @ComponentScan  #默认扫描当前报下的类
+
+
+
+       todo 41.54
