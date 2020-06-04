@@ -7,10 +7,11 @@
 
 @SpringBootApplication
     @EnableAutoConfiguration
+
     @ComponentScan
     @Configuration
         @ComponentScan  #默认扫描当前报下的类
 
 
 
-       todo 41.54
+     todo 3.5.3-3.5.6
