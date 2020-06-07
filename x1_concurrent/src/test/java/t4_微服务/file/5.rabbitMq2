@@ -1,0 +1,21 @@
+1.过期时间:
+    队列过期时间
+    单条消息过期时间   #队列与单条同时设置单条管用
+2.死信队列 Dead Letter
+    1.DLQ:满足一些条件变成死信 所存储的对列 叫死信队列  DLQ(Dead Letter Queue)
+    2.DLX:路由死信队列的交换机叫 死信交换机 DLX(Dead Letter Exchage)
+    3.怎么指定:在创建队列的时候指定 死信交换机 死信交换机又绑定了死信队列
+    4.变成死信的情况
+        1.消息被消费者拒绝
+        2.消息过期
+        3.队列到达最大长度(会把队列头的信息放入死信队列)
+3.延迟队列实现方式
+    1.数据库配信息 定时任务扫描
+    2.死信队列实现 设置过期时间放入死信队列 去读取死信队列
+    2.插件:rabbitmq-delayed-message-exchange(linux)
+
+4.服务端流控
+    内存控制 超过40% 禁止连接   #比例可以通过参数修改:vm_memory_high_watermark
+    磁盘控制 磁盘空间低于多少    #比例:disk_free_limit.relative   固定数值:disk_free_limit.absolute=2GB
+5.消费端限流#消费端本地会缓存消息
+    prefetchCount:服务端接受多少消息没有给服务端应答 就不再给对应的队列投递信息
