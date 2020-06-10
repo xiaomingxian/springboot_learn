@@ -14,8 +14,79 @@
     2.死信队列实现 设置过期时间放入死信队列 去读取死信队列
     2.插件:rabbitmq-delayed-message-exchange(linux)
 
-4.服务端流控
+4.服务端流控  #消费的速度跟不上生产的速度 mq打过来的消息太多了
     内存控制 超过40% 禁止连接   #比例可以通过参数修改:vm_memory_high_watermark
     磁盘控制 磁盘空间低于多少    #比例:disk_free_limit.relative   固定数值:disk_free_limit.absolute=2GB
-5.消费端限流#消费端本地会缓存消息
+5.消费端限流     #消费端本地会缓存消息    #消费的速度跟不上生产的速度 mq打过来的消息太多了
     prefetchCount:服务端接受多少消息没有给服务端应答 就不再给对应的队列投递信息
+
+6.消息可靠性投递
+    队列是独立运行的服务 消息持久化:https://blog.csdn.net/u013887008/article/details/90341014
+    1.服务端确认机制:
+        1.事务:
+            将信道(channel)设置成事务模式[channel.txSelect()] channel.txCommit(); channel.txRollback()
+            缺点:消息阻塞 1完成后 2才能开始
+        2.confirm模式
+            1.逐条confirm模式
+                将channel设置成confirm模式 channel.confirmSelect();  if(channel.waitForConfirms ){//消息发送成功}
+                缺点:逐条确认,效率低
+            2.批量confirm
+                将channel设置成confirm模式 channel.confirmSelect(); #发送多条  channel.waitForConfirmOrDie()//消息全部发送成功
+                 问题:多少条确认一次合适
+            3.异步确认(边发送边确认) channel.addConfirmListener(new ConfirmListener()){...}
+                模板形式:rabbitTemplate.setConfirmCallback(new RabbitTemplate.ConfirmCallback(){...})
+    2.路由不到队列的情况
+        1.路由键错误
+            1.指定一定要匹配路由键模式(mandatory=true+returnListener):匹配不上 服务器会返回 No_Route
+            2.指定备份交换机
+        2.队列挂了
+    3.消息持久化
+        1.队列持久化
+        2.交换机持久化
+        3.消息持久化
+        4.集群
+    4.消费者确认机制
+        自动ACK:消费者收到消息就算成功
+        手动ACK:
+    4.消费者拒绝机制,拒绝后会重新入队(requeue参数)
+
+
+7.集群 端口:25672
+    1.集群身份:.erlang.cookie
+    2.节点类型:
+        磁盘节点:数据备份(以防发生意外的情况)
+        内存节点:连接应用
+    3.集群类型
+        普通集群
+        镜像集群
+==================================================
+==================================================
+==================================================
+==================================================
+面试题:
+    1.作用和使用场景:略
+    2.Channel和vhost的作用
+        Channel为了减少tcp连接
+        vhost 提高硬件资源利用率和资源隔离
+    3.交换机类型及使用场景  参考4.rabbitMq
+    ..
+    8.延迟消息队列
+        1.写到数据库里定时扫描
+        2.过期时间+死信队列+死信队列监听器(监听到就发送)
+        3.延时插件
+    9.消费者接受不到消息的情况 参考可靠性消息投递
+    10.队列可以存多少数据
+        1.磁盘节点/内存结点(如果做了持久化也是取决于磁盘)
+        2.如果设置了这两个参数就取决于这两个参数x-max-length x-max-length-bytes
+    11.怎么提高消息的消费速率        增加消费者
+    12.如何动态的增加队列消费者:ListenerContainer中做
+    13.如何保证消息的顺序性:队列只有一个消费者的情况下
+    14.如果有大量的消息堆积:1.重启 2.增加消费者 3.清空队列重发消息(不重要的消息[日志等])
+
+Mq的选型
+    使用与管理
+    社区
+    性能，并发，消息吞吐量，消息堆积的能立
+    ...
+
+设计mq思路:
