@@ -1,0 +1,24 @@
+1.XA:https://blog.csdn.net/wuzhiwei549/article/details/79925618
+    事务组 Map<String,List<String>> <groupId,List<每个事务的状态JSON串>>
+        serverHandler拦截请求 创建事务组
+
+    自定义注解拦截 设置优先级 implements order 在getOrder中设置优先级 靠后
+        在切面方法里实现创建用户组等逻辑
+        connection.commit()
+        connection.rollback()
+
+
+2.
+
+
+
+
+
+
+
+
+
+
+
+
+
