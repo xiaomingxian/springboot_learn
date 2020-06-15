@@ -1,0 +1,2 @@
+查看堆栈信息:https://zhuanlan.zhihu.com/p/37653033
+jstat -gccapacity pid： 可以显示，VM内存中三代（young,old,perm）对象的使用和占用大小

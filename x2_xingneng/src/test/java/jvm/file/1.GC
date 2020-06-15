@@ -1,0 +1,19 @@
+Young GC(包含了Eden,S区):Minor GC
+Old GC:Major GC,MajorGC 通常会伴随着Minor GC,也就意味着会触发Full GC
+Young+Old:Full GC
+
+尽量减少GC频率:
+    Full GC 执行时间长,尽量减少Full GC频率
+
+
+s0/s1必须得保证一块是空的
+
+
+================================== gc root
+栈中的局部变量表(方法中的变量): 栈中的标识正在被线程执行
+... 参考doc
+
+
+cms(concurrent):用户线程与垃圾收集线程并行执行  -XX:+UseConcMarkSweepGC
+
+G1:小的停顿时间(自定义)+高吞吐量   # regin 空间压缩

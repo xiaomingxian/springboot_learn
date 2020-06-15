@@ -1,6 +1,6 @@
 
 =========================工具
-explain sql
+explain sql:https://www.cnblogs.com/wy123/p/7366486.html
   key:用到的索引
   extra:Using index 查询的字段到了索引,Using where where条件用到了索引
 

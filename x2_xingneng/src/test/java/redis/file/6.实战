@@ -1,6 +1,8 @@
 redis客户端:
 
-pipeline(批量操作):多少数据发一次可以配置  #对数据的实时性要求不高的场景
+todo:
+    https://www.cnblogs.com/pc-boke/articles/9045576.html
+    pipeline(批量操作):多少数据发一次可以配置 #则是要将多个命令缓存起来，缓冲区满了就发送，然后再写缓冲  #对数据的实时性要求不高的场景
 传统慢:tcp 网络延迟/服务端io延迟
 
 

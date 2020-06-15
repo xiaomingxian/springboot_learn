@@ -46,4 +46,13 @@ public class RedisController {
         return map;
     }
 
+
+    @RequestMapping("pipeLineTest")
+    public void  pipeLineTest(){
+//        redisTemplate.pip
+
+
+    }
+
+
 }

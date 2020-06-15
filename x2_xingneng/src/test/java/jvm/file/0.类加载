@@ -4,3 +4,12 @@
     初始化:为静态变量赋真正的值 eg:String a=10 #将地址之后变成真正的值
 
 javap -c xxx.class
+
+栈帧:
+    局部变量表  #局部变量
+    操作数栈    #压栈弹栈 iload_0/1...
+    动态链接
+    方法返回地址
+#堆指向方法区  对象属于哪个对象  对象属于堆 类信息属于方法区    #栈 与线程的生命周期一致
+#方法区指向堆  static Person person=new Person()
+#栈指向堆     成员变量 Person person=new Person()
