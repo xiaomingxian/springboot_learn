@@ -1,2 +1,14 @@
 堆大小：-XMS -XMX
 栈大小：-Xss -Xsx   stack
+
+
+jinfo -flag UserG1GC/... pid
+
+查看堆信息: jmap -heap pid   #查看是youngGC还是FullGc
+dump文件导出:jmap -dump:format=b,file=heap.hprof pid
+发生OOM时自动生成dump文件:-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=heap.hprof
+
+工具:
+    jconsole
+
+允许远程连接的jvm参数  https://www.cnblogs.com/bzdmz/p/11434072.html
