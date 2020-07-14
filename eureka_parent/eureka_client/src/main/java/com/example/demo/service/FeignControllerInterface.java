@@ -5,7 +5,6 @@ import com.example.demo.service.exception.FeginClientFallBcakFactory;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.io.InputStream;
 import java.util.Map;
 
 
