@@ -1,0 +1,16 @@
+{
+  "Kernel pid terminated",
+  application_controller,
+  "{application_start_failure,rabbit,
+{bad_return,{{rabbit,start,[normal,[]]},
+{'EXIT',{badarg,[{io,format,[<0.248.0>,
+\"~n  ##  ##~n  ##  ##
+~s ~s. ~s~n  ##########  ~s~n  ######  ##~n  ##########  Logs: ~s~n                    ~s~n~n              Starting broker...~n\",
+[\"RabbitMQ\",\"3.7.5\",\"Copyright (C) 2007-2018 Pivotal Software, Inc.\",\"Licensed under the MPL.
+See http://www.rabbitmq.com/\",[67,58,47,85,115,101,114,115,47,20185,47,65,112,112,68,97,116,97,47,82,111,97,109,
+105,110,103,47,82,97,98,98,105,116,77,81,47,108,111,103,47,82,65,66,66,73,84,126,49,46,76,79,71],
+[67,58,47,85,115,101,114,115,47,20185,47,65,112,112,68,97,116,97,47,82,111,97,109,105,110,103,47
+,82,97,98,98,105,116,77,81,47,108,111,103,47,114,97,98,98,105,116,64,76,65,80,84,79,80,45,76,49
+,76,80,74,69,81,84,95,117,112,103,114,97,100,101,46,108,111,103]]],[]},{rabbit,start,2,
+[{file,\"src/rabbit.erl\"},{line,797}]},{application_master,start_it_old,4,[{file,\"application_master.erl\"},{line,273}]}]}}}}}"
+}
