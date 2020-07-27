@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class TestMq {
 
-    private static final String QUEUE_NAME = "test_simple_queue";
+    private static final String QUEUE_NAME = "queue1";
 
     @Test
     public void sendMsg() {
@@ -18,7 +18,7 @@ public class TestMq {
             //从连接中获取一个通道
             Channel channel = connect.createChannel();
             //String queue, boolean durable, boolean exclusive, boolean autoDelete, Map<String, Object> arguments
-            channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+            channel.queueDeclare(QUEUE_NAME, false, false, true, null);
             //
             String msg = "消息1";
             channel.basicPublish("", QUEUE_NAME, null, msg.getBytes());

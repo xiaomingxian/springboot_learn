@@ -12,7 +12,7 @@ public class ConnectUtil {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("49.234.25.12");
         factory.setPort(5672);
-        factory.setVirtualHost("/my_vhost");
+        factory.setVirtualHost("/");
         factory.setUsername("guest");
         factory.setPassword("guest");
         Connection connection = null;

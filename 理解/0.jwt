@@ -1,0 +1,22 @@
+https://blog.csdn.net/u011607686/article/details/88829350
+详细：https://blog.csdn.net/weixin_45139342/article/details/104599151
+图解:./pic/0.jwtpng.png
+
+
+
+
+Header 头部
+    头部包含了两部分，token 类型和采用的加密算法
+
+Payload 负载
+    这部分就是我们存放信息的地方了，你可以把用户 ID 等信息放在这里，
+    JWT 规范里面对这部分有进行了比较详细的介绍，常用的由 iss（签发者）
+    ，exp（过期时间），sub（面向的用户），aud（接收方），iat（签发时间）
+
+Signature 签名
+    前面两部分都是使用 Base64 进行编码的，即前端可以解开知道里面的信息。
+    Signature 需要使用编码后的 header 和 payload 以及我们提供的一个密钥（服务器端提供，客户端不知道），
+    然后使用 header 中指定的签名算法（HS256）进行签名。签名的作用是保证 JWT 没有被篡改过。
+
+
+服务端给客户端的是已经加密完成的token secret只有服务端有 服务端会根据这个解密
