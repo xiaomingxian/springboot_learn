@@ -12,6 +12,8 @@ docker ui:https://www.cnblogs.com/frankdeng/p/9686735.html
 
 ------------------------------------------------------------------------------------------------------------------------
 启动参数:
+     --restart always #重启docker后自动重启
+
      rabbitmq  docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 -e TZ="Asia/Shanghai" -v /etc/localtime:/etc/localtime -e RABBITMQ_DEFAULT_USER=guest -e RABBITMQ_DEFAULT_PASS=guest c20a8529776b
 
 
@@ -19,7 +21,7 @@ docker ui:https://www.cnblogs.com/frankdeng/p/9686735.html
 
      zk:  docker run -d  --name some-zookeeper -p 2181:2181 --restart always 镜像id
 
-     dockerui: docker run -d --name portainerUI -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
+     dockerui: docker run -d --name portainerUI -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock --restart always portainer/portainer
             密码 admin_docker
 -----------命令:
 docker [OPTIONS] COMMAND [arg...]
@@ -46,6 +48,16 @@ centos版本: unmame -r 或者 cat /etc/red...
 
 仓库:dockerhub  aliyun 网易云    镜像加速
 
+-------------------------- 容器命令  ---------------------------
+-i 可交互
+-t 伪终端
+docker  ps -n 3 #上三次运行的容器
+-q 只显示容器编号(id)
+-l 显示最近创建的容器
+-a 显示所有容器
+--no-trunc 不断截输出内容
+exit 离开并关闭容器
+ctrl + p + q 临时退出
 
 
 //todo   https://www.bilibili.com/video/BV1Vs411E7AR?p=14
