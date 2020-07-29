@@ -49,15 +49,25 @@ centos版本: unmame -r 或者 cat /etc/red...
 仓库:dockerhub  aliyun 网易云    镜像加速
 
 -------------------------- 容器命令  ---------------------------
--i 可交互
--t 伪终端
-docker  ps -n 3 #上三次运行的容器
--q 只显示容器编号(id)
--l 显示最近创建的容器
--a 显示所有容器
---no-trunc 不断截输出内容
-exit 离开并关闭容器
-ctrl + p + q 临时退出
-
-
-//todo   https://www.bilibili.com/video/BV1Vs411E7AR?p=14
+base:
+    -i 可交互
+    -t 伪终端
+    docker  ps -n 3 #上三次运行的容器
+    -q 只显示容器编号(id)
+    -l 显示最近创建的容器
+    -a 显示所有容器
+    --no-trunc 不断截输出内容
+    exit 离开并关闭容器
+    ctrl + p + q 临时退出
+    docker start 容器id #第一次启动用run 后来用start
+    docker stop 容器id #停止容器
+    docker kill 容器di #强制停止
+    docker rm 容器id #删除容器    -f 强制删除
+    docker rmi 镜像id #删除镜像   -f 强制删除
+    docker rm -f ${docker ps -aq}  #删除所有容器  ${}内的为查出所有容器id
+    docker ps -aq | xargs docker rm #删除所有容器 将查出来的id作为参数进行传递
+import
+    docker run -d 容器id #后台启动
+    docker logs -ft --tail=1000 c18ca865f9e3  #日志查看
+    docker attach 容器id #进入容器
+    docker exec -t 容器id(假设是个centos) ls -l /tmp #exec运行  进入虚拟机读取目录返回给宿主机
