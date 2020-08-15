@@ -52,6 +52,8 @@ centos版本: unmame -r 或者 cat /etc/red...
 base:
     -i 可交互
     -t 伪终端
+    -P 随机端口
+    -p -p 主机端口:对外容器端口
     docker  ps -n 3 #上三次运行的容器
     -q 只显示容器编号(id)
     -l 显示最近创建的容器
