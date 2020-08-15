@@ -66,8 +66,11 @@ base:
     docker rmi 镜像id #删除镜像   -f 强制删除
     docker rm -f ${docker ps -aq}  #删除所有容器  ${}内的为查出所有容器id
     docker ps -aq | xargs docker rm #删除所有容器 将查出来的id作为参数进行传递
-import
+进阶
     docker run -d 容器id #后台启动
-    docker logs -ft --tail=1000 c18ca865f9e3  #日志查看
+    docker logs -tf --tail 100 容器id  #查看最新的100条  -t显示时间 -f最新 --tail 100只看100条在底部拼接显示
+    查看容器内的进程：docker top 容器id
+    查看容器内的细节：docker inspect 容器id
     docker attach 容器id #进入容器
     docker exec -t 容器id(假设是个centos) ls -l /tmp #exec运行  进入虚拟机读取目录返回给宿主机
+    数据拷贝(容器->主机):docker cp 容器id:容器内路径 主机路径
