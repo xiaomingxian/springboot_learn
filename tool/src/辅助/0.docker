@@ -50,6 +50,7 @@ centos版本: unmame -r 或者 cat /etc/red...
 
 -------------------------- 容器命令  ---------------------------
 base:
+    -p服务端口:docker容器端口
     -i 可交互
     -t 伪终端
     docker  ps -n 3 #上三次运行的容器
@@ -71,3 +72,9 @@ import
     docker logs -ft --tail=1000 c18ca865f9e3  #日志查看
     docker attach 容器id #进入容器
     docker exec -t 容器id(假设是个centos) ls -l /tmp #exec运行  进入虚拟机读取目录返回给宿主机
+
+---------------------- 镜像原理 #https://blog.csdn.net/songcf_faith/article/details/82787946
+花卷(联合文件系统)(Union File System):一层一层 内层的东西可以共享 (tomcat很大) #https://www.cnblogs.com/zhangjianbing/p/9932156.html
+
+
+
