@@ -59,8 +59,8 @@ base:
     -l 显示最近创建的容器
     -a 显示所有容器
     --no-trunc 不断截输出内容
-    exit 离开并关闭容器
-    ctrl + p + q 临时退出
+    exit 离开并关闭容器 [出门关灯]
+    ctrl + p + q 临时退出 [出门不关灯]
     docker start 容器id #第一次启动用run 后来用start
     docker stop 容器id #停止容器
     docker kill 容器di #强制停止
@@ -73,6 +73,6 @@ base:
     docker logs -tf --tail 100 容器id  #查看最新的100条  -t显示时间 -f最新 --tail 100只看100条在底部拼接显示
     查看容器内的进程：docker top 容器id
     查看容器内的细节：docker inspect 容器id
-    docker attach 容器id #进入容器
+    docker attach 容器id #进入容器 进入之后可以进行一系列操作 例如docker容器是centos进去之后可以 cd/ls/ll/cp ...
     docker exec -t 容器id(假设是个centos) ls -l /tmp #exec运行  进入虚拟机读取目录返回给宿主机
     数据拷贝(容器->主机):docker cp 容器id:容器内路径 主机路径
