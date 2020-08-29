@@ -21,7 +21,7 @@
             带权限
                 docker run -it  -v /宿主机的据对路径:/容器内目录:ro 镜像名  #ro:只读read only
         2 DockerFile添加
-            参考 ./2.dockerFile
+            参考 ./2.dockerFile创建容器卷
 
 
 
