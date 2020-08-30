@@ -61,7 +61,7 @@ base:
     --no-trunc 不断截输出内容
     exit 离开并关闭容器 [出门关灯]
     ctrl + p + q 临时退出 [出门不关灯]
-    docker start 容器id #第一次启动用run 后来用start
+    docker start 容器id #第一次启动用run 后来用starts
     docker stop 容器id #停止容器
     docker kill 容器di #强制停止
     docker rm 容器id #删除容器    -f 强制删除
@@ -76,3 +76,6 @@ base:
     docker attach 容器id #进入容器 进入之后可以进行一系列操作 例如docker容器是centos进去之后可以 cd/ls/ll/cp ...
     docker exec -t 容器id(假设是个centos) ls -l /tmp #exec运行  进入虚拟机读取目录返回给宿主机
     数据拷贝(容器->主机):docker cp 容器id:容器内路径 主机路径
+    进入容器交互：
+        sudo docker ps
+        $ sudo docker exec -it 775c7c9ee1e1 /bin/bash
