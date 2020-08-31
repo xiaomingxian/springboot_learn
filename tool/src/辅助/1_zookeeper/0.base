@@ -36,3 +36,36 @@ dicker exec -it 进程号 /bin/bash
                              ｜-----服务4(上线或下线)
     4 软负载均衡
         zk中记录每台服务器的访问数,让访问数最少的服务器去处理最新的客户端请求
+
+配置参数解读:https://www.cnblogs.com/xiohao/p/5541093.html
+    dataDir=/....
+    tickTime=2000    #2000ms 2s 一个心跳
+    initLimit=10     #启动初始化延时:10个心跳时间 10*2s 最大延迟时间  #Leader 与 Flower 连接时间 如果超过这个时间就认为是连不上了 #启动的时候 耗时 延时设置的长
+    ...
+
+
+内部原理:
+    选举机制:(投票)半数机制(半数以上机器存活,集群可用),所以zk适合安装奇数台服务器
+
+
+节点类型:https://www.cnblogs.com/wzlbigdata/p/8404870.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
