@@ -51,6 +51,14 @@ dicker exec -it 进程号 /bin/bash
 节点类型:https://www.cnblogs.com/wzlbigdata/p/8404870.html
 
 
+命令:https://www.jianshu.com/p/fd859f08cfca
+    create -e /... 临时节点生命周期是session quit后再进入会消失
+    set /... update_val #修改节点
+    get /... watch      #监听节点  可以在另一个会话中测试看效果
+    ls /... watch      #监听子节点  只能监听到增删
+    ...
+
+
 
 
 
