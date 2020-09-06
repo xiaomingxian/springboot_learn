@@ -58,6 +58,31 @@ dicker exec -it 进程号 /bin/bash
     ls /... watch      #监听子节点  只能监听到增删
     ...
 
+Stat结构体
+    查看 eg:ls -s /
+    1)czxid- 引起这个znode创建的zxid，创建节点的事务的zxid
+
+    2)ctime - znode被创建的毫秒数(从1970年开始)
+
+    3)mzxid - znode最后更新的zxid
+
+    4)mtime - znode最后修改的毫秒数(从1970年开始)
+
+    5)pZxid-znode最后更新的子节点zxid
+
+    6)cversion - znode子节点变化号，znode子节点修改次数
+
+    7)dataversion - znode数据变化号
+
+    8)aclVersion - znode访问控制列表的变化号
+
+    9)ephemeralOwner- 如果是临时节点，这个是znode拥有者的session id。如果不是临时节点则是0
+
+    10)dataLength- znode的数据长度
+
+    11)numChildren - znode子节点数量
+
+监听器原理
 
 
 
