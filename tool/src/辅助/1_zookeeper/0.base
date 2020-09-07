@@ -83,10 +83,22 @@ Stat结构体
     11)numChildren - znode子节点数量
 
 监听器原理
+    1.首先有一个main线程
+    2.在main线程中创建客户端,这时就会创建2个线程:一个负责网络通信(connect),一个负责监听(listener)
+    3.通过connect线程将注册的监听事件发送给zookeeper
+    4.在zookeeper的注册监听器列表中将注册的监听事件添加到列表中
+    5.zookeeper监听到有数据或路径发生变化,就会将这个消息发送给listener线程
+    6.listener内部调用了process()方法
 
+常见的监听
+    1 监听节点数据的变化     get path [watch]
+    2 监听子节点增减的变化    ls path [watch]
 
-
-
+写数据流程
+    1.client发送写请求到server1
+    2.leader写数据  如果client的写请求的不是leader
+        那么这个请求会转发到leader leader会将写请求广播给各个server 各个server写成功后就会通知leader
+    3.leader 收到大多数server数据写成功了(大多数 eg:2/3),就说明数据写成功了
 
 
 
