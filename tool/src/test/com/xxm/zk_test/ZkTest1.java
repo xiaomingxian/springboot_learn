@@ -7,6 +7,10 @@ import org.apache.zookeeper.data.Stat;
 import java.io.IOException;
 
 public class ZkTest1 {
+
+    private static  String address="49.234.25.12:2181";
+
+
     public static void main(String[] args) {
 
         try {
