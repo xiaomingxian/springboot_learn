@@ -1,0 +1,4 @@
+1.服务器动态上下线:com.xxm.zk_test.ZkTest3_ServerDynamicUpAndDown
+    服务会产生新的节点(临时节点[客户端会话失效会自动移除(此处的服务相对于zk属于客户端)])
+    客户端 zkClient.getChildren("/", true);  监听器监听到变化时再次获取服务列表
+    //servers跟节点不能是临时节点 临时节点不能创建子节点
