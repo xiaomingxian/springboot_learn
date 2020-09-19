@@ -1,9 +1,13 @@
 package com.xxm.zk_test;
 
+import com.sun.xml.internal.fastinfoset.tools.FI_DOM_Or_XML_DOM_SAX_SAXEvent;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +17,13 @@ public class ZkTest3_ServerDynamicUpAndDown {
     private int sessionTimeOut = 2000;
     private ZooKeeper zkClient = null;
     private String parentNode = "/servers";
+
+
+
+
+    public static void main(String[] args) throws IOException {
+        System.out.println("1111\r\n2222");
+    }
 
 
     //1.服务上线,注册到zk
