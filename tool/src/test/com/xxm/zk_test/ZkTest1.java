@@ -1,5 +1,4 @@
-package com.xxm.zk_test
-        ;
+package com.xxm.zk_test;
 
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;

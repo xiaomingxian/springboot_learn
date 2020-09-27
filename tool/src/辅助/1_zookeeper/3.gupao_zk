@@ -1,0 +1,14 @@
+https://www.cnblogs.com/Soy-technology/p/11404347.html
+1.重试策略(4种):   https://blog.csdn.net/shangsu666/article/details/51453263
+    衰减重试:ExponentialBackoffRetry  随着重试次数增加重试时间间隔变大,指数倍增长
+    仅仅重试一次:RetryOneTime
+    默认重策略:RetryUntilElapsed   重试的时间超过最大时间后，就不再重试
+    N次数:RetryNTimes(N次,时间间隔)
+2.权限(ACL)
+    READ
+    WRITE
+    DELETE
+    ADMIN
+    ALL
+
+
