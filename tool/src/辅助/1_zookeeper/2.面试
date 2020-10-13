@@ -41,3 +41,6 @@ https://www.cnblogs.com/Soy-technology/p/11404347.html
         保持独占：开始/申请节点 -->释放/删除节点  其他loop等待
         控制时序：顺序节点+临时节点  其他等待    : 最小的节点持有锁(后续节点监听前一个节点,前一个节点被移除后后一个去获得锁)
 
+6 Master选举实现方式(非Zk自身)：类似于分布式锁的实现方式 不过竞争的是Master
+
+7.zab协议 https://www.jianshu.com/p/2bceacd60b8a
