@@ -1,0 +1,7 @@
+count() https://www.cnblogs.com/meimei00/p/10558551.html
+    效率:count(*)>count(1)>count(id)>count(列)
+        count(*):不会忽略为null的值 统计的是行数
+        count(1):不会忽略为null的值 不解析记录 直接替换为1
+        count(id):会忽略为null的值  需要解析记录 并判断是否为null
+        count(列):会忽略为null的值  需要解析记录 并判断是否为null
+
