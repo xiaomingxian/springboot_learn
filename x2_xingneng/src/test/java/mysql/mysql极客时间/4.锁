@@ -1,0 +1,12 @@
+锁：
+    全局锁：
+        备份数据库时使用(FTWRL[Flush Tables with Read Lock]))
+            支持事务的引擎可开启可重复度级别(基于某一个视图去做备份
+            set global readonly=true 也可以使库只读但是不推荐:
+                1.readonly会被用来做其他逻辑判断(eg:判断是主库还是从库),修改它影响太大
+                2.发生异常会一直使库处于readonly状态,FTWRL发生异常后会自动断开
+    表锁：一种是表锁，一种是元数据锁（ meta data lock ， MDL) 。
+        表锁 eg:lock tables t1 read, t2 write;
+            unlock tables
+        元数据锁 eg: MDL 锁是系统默认会加  加表锁假如没有释放 请求一直打上来会导致数据库挂
+    行锁：
