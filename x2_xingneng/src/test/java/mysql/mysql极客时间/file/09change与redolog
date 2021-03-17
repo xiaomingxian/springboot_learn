@@ -1,0 +1,5 @@
+changebuffer 更新数据
+    数据在内存中就直接更新内存(Innodb buffer poll)中的数据
+    数据不再内存中 就将更新操作记录在 change buffer
+redolog 记录操作
+    内存操作 + change buffer中的操作
