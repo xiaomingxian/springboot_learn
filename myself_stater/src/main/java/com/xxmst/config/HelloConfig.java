@@ -2,6 +2,7 @@ package com.xxmst.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+
 @ConfigurationProperties(prefix = "hello")
 public class HelloConfig {
     private String name;
