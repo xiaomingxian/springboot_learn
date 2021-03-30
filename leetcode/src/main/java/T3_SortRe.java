@@ -3,7 +3,7 @@ import org.junit.Test;
 public class T3_SortRe {
     @Test
     public void maopao() {
-        int[] array = {2, 1, 6, 10, 8, 4, 7, 9};
+        int[] array = {2,  6,1, 10, 8, 4, 9,7};
 
         for (int i = 0; i < array.length-1; i++) {//比多少轮
             for (int j = 0; j < array.length-1-i; j++) {//每一轮比完后 就会出现一个极值
